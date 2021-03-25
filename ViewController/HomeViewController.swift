@@ -1,0 +1,129 @@
+//
+//  ViewController.swift
+//  ListApp
+//
+//  Created by tobi adegoroye on 12/03/2021.
+//
+
+import UIKit
+import CoreData
+
+
+class HomeViewController: UIViewController {
+    
+    private var noteViewModel: NoteViewModel!
+ 
+    var firstLoad = true
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        noteViewModel = NoteViewModel(context: context)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    let tableview: UITableView = {
+        let tableview = UITableView()
+        tableview.translatesAutoresizingMaskIntoConstraints = false
+        tableview.separatorStyle = .none
+        tableview.backgroundColor = .clear
+        tableview.rowHeight = UITableView.automaticDimension
+        tableview.estimatedRowHeight = 44
+        tableview.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellID)
+        return tableview
+    }()
+    
+    @objc func add(){
+        let formVC = FormViewController()
+        formVC.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(formVC, animated: true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        tableview.dataSource = self
+        setupView()
+         navigationController?.navigationBar.barTintColor = .white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
+        navigationItem.rightBarButtonItem?.tintColor = .black
+        tableview.reloadData()
+        requestPermission()
+    }
+    
+    func requestPermission() -> Void {
+       UNUserNotificationCenter
+           .current()
+           .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
+               if granted == true && error == nil {
+                   // We have permission!
+               }
+       }
+   }
+    
+    func setupView() {
+        view.backgroundColor = UIColor(hexString: "#F2F2F2")
+        view.addSubview(tableview)
+        
+        NSLayoutConstraint.activate([
+            tableview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableview.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+}
+
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return  noteViewModel.noteList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let note =  noteViewModel.noteList[indexPath.row]
+        let cell = tableview.dequeueReusableCell(withIdentifier: ListTableViewCell.cellID,for: indexPath) as? ListTableViewCell
+        cell?.configure(note: note, isTap: noteViewModel.doesExist(item: note), indexPath: indexPath, delegate: self)
+        cell?.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell?.backgroundColor = .clear
+        return cell!
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let note = noteViewModel.noteList.remove(at: indexPath.row)
+            tableview.deleteRows(at: [indexPath], with: .automatic)
+            noteViewModel.remove(note: note)
+        }
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        noteViewModel.noteList = noteViewModel.getAllUnCompletedNote()
+        tableview.reloadData()
+    }
+    
+    
+}
+
+ 
+
+extension HomeViewController: ListTableViewCellDelegate {
+    
+    func didComplete(note: Note, at indexPath: IndexPath) {
+        DispatchQueue
+            .main
+            .asyncAfter(deadline: .now() + 0.25) {
+                self.noteViewModel.complete(true, note: note)
+                self.tableview.deleteRows(at: [indexPath], with: .automatic)
+        }
+        // Here we want to set the completed flag to true in db
+    }
+}
+
