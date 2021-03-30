@@ -73,7 +73,23 @@ class HomeViewController: UIViewController {
             }
     }
     
+    
+    private func createToolBar(){
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
+        
+        toolBar.setItems([doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        searchBar.inputAccessoryView = toolBar
+     }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
+    
     func setupView() {
+        createToolBar()
         view.backgroundColor = UIColor(hexString: "#F2F2F2")
         view.addSubview(tableview)
         view.addSubview(searchBar)
