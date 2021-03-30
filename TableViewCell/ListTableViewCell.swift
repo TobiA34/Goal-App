@@ -80,6 +80,8 @@ class ListTableViewCell: UITableViewCell {
         dateView.backgroundColor = .green
         dateView.layer.cornerRadius = 16
         dateView.clipsToBounds = true
+        dateView.backgroundColor = .green
+
         return dateView
     }()
     
@@ -104,7 +106,7 @@ class ListTableViewCell: UITableViewCell {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         card.layer.cornerRadius = 19
-        card.backgroundColor =  .white
+        card.backgroundColor = UIColor(named: "card")
         return card
     }()
     

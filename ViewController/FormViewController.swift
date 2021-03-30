@@ -41,6 +41,7 @@ class FormViewController: UIViewController {
         let titleLbl = UILabel()
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         titleLbl.text = "Title"
+        titleLbl.textColor = UIColor(named: "textColor")
         return titleLbl
     }()
     
@@ -61,13 +62,14 @@ class FormViewController: UIViewController {
         let label = UILabel()
         label.text = "Choose category"
         label.font = label.font.withSize(25)
+        label.textColor = UIColor(named: "textColor")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let catagoryTextField: UITextField = {
         let catagoryTextField = UITextField()
-        catagoryTextField.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0) /* #f9f9f9 */
+        catagoryTextField.backgroundColor =  .gray/* #f9f9f9 */
         catagoryTextField.placeholder = "[pick a category]"
  
         catagoryTextField.font = catagoryTextField.font?.withSize(20)
@@ -78,6 +80,7 @@ class FormViewController: UIViewController {
     let endDateLabel: UILabel = {
         let endDateLabel = UILabel()
         endDateLabel.text = "Choose end date"
+        endDateLabel.textColor = UIColor(named: "textColor")
         endDateLabel.font = endDateLabel.font.withSize(25)
         endDateLabel.translatesAutoresizingMaskIntoConstraints = false
         return endDateLabel
@@ -93,6 +96,8 @@ class FormViewController: UIViewController {
         let descriptionLbl = UILabel()
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.text = "Description"
+        descriptionLbl.textColor = UIColor(named: "textColor")
+
         return descriptionLbl
     }()
     
@@ -108,7 +113,8 @@ class FormViewController: UIViewController {
     let card: UIView = {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
-        card.backgroundColor = UIColor(hexString: "#FFFFFF")
+        card.backgroundColor = UIColor(named: "card")
+        
         card.layer.cornerRadius = 19
         return card
     }()
@@ -203,7 +209,7 @@ extension FormViewController {
 
 extension FormViewController {
     func setupView() {
-        view.backgroundColor = UIColor(hexString: "#F2F2F2")
+        view.backgroundColor = UIColor(named: "background")
         createCatagoryPicker()
         createToolBar()
         
@@ -240,7 +246,8 @@ extension FormViewController {
             
             
             catagoryTextField.topAnchor.constraint(equalTo: catagoryLabel.bottomAnchor, constant: 15),
-            catagoryTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            catagoryTextField.leadingAnchor.constraint(equalTo: card.leadingAnchor, constant: 20),
+            catagoryTextField.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -20),
             catagoryTextField.heightAnchor.constraint(equalToConstant: 50),
             catagoryTextField.widthAnchor.constraint(equalToConstant: 350),
             
@@ -263,6 +270,7 @@ extension FormViewController {
             descriptionTextView.topAnchor.constraint(equalTo: descriptionLbl.bottomAnchor,constant: 20),
             descriptionTextView.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 20),
             descriptionTextView.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -20),
+            
             descriptionTextView.heightAnchor.constraint(equalToConstant: 200)
  
         ])

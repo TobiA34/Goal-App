@@ -6,14 +6,21 @@
 //
 
 import UIKit
+
+
+protocol CompletedNoteTableViewCellDelegate: class {
+    func undo(completedNote: Note, at indexPath: IndexPath)
+}
  
- 
+
 class CompletedNoteTableViewCell: UITableViewCell {
     
     
     static let cellID = "CompletedNoteTableViewCell"
- 
- 
+    private var delegate: CompletedNoteTableViewCellDelegate?
+    private var completedNote: Note?
+    private var indexPath: IndexPath?
+    
     let titleLbl: UILabel = {
         let titleLbl = UILabel()
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -21,6 +28,17 @@ class CompletedNoteTableViewCell: UITableViewCell {
         titleLbl.numberOfLines = 0
         titleLbl.textColor = UIColor(named: "textColor")
         return titleLbl
+    }()
+    
+    let doneButton: UIButton = {
+        let doneButton = UIButton()
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.backgroundColor = UIColor(hexString: "#C4C4C4")
+        doneButton.layer.cornerRadius = 19
+        doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        
+        doneButton.setImage(UIImage(named: "tick"), for: .normal)
+        return doneButton
     }()
     
     let descriptionLbl: UILabel = {
@@ -31,40 +49,58 @@ class CompletedNoteTableViewCell: UITableViewCell {
         descriptionLbl.textColor = UIColor(named: "textColor")
         return descriptionLbl
     }()
- 
+    
     
     let card: UIView = {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         card.layer.cornerRadius = 19
-        card.backgroundColor =  .white
+        card.backgroundColor = UIColor(named: "card")
         return card
     }()
     
- 
-    func configure(completedNote: Note){
+    @objc func undoNote(){
+        
+        if let selectedNote = completedNote,
+           let indexPath = indexPath {
+            doneButton.setImage(selectedNote.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
+            delegate?.undo(completedNote: selectedNote, at: indexPath)
+        }
+    }
+    
+    
+    func configure(completedNote: Note, isTap: Bool, indexPath: IndexPath,
+                   delegate: CompletedNoteTableViewCellDelegate?){
         setupView()
+        self.delegate = delegate
+        self.completedNote = completedNote
+        self.indexPath = indexPath
         titleLbl.text = completedNote.title
-        descriptionLbl.text = "HEHRFHBSDHBS"
-     }
+        descriptionLbl.text = completedNote.desc
+        doneButton.setImage(!completedNote.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
+    }
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLbl.text =  nil
         descriptionLbl.text =  nil
     }
     
-}
     
+}
+
 
 
 
 private extension CompletedNoteTableViewCell {
     
     func setupView() {
- 
+        
         contentView.addSubview(card)
         card.addSubview(titleLbl)
         card.addSubview(descriptionLbl)
+        card.addSubview(doneButton)
+        
+        doneButton.addTarget(self, action: #selector(undoNote), for: .touchUpInside)
 
         
         NSLayoutConstraint.activate([
@@ -73,7 +109,7 @@ private extension CompletedNoteTableViewCell {
             card.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 40),
             card.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -40),
             card.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
-   
+            
             titleLbl.topAnchor.constraint(equalTo: card.topAnchor,constant: 20),
             titleLbl.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 20),
             titleLbl.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -20),
@@ -81,8 +117,16 @@ private extension CompletedNoteTableViewCell {
             descriptionLbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor,constant: 10),
             descriptionLbl.leadingAnchor.constraint(equalTo: titleLbl.leadingAnchor),
             descriptionLbl.trailingAnchor.constraint(equalTo: titleLbl.trailingAnchor),
-            descriptionLbl.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -20)
- 
+            descriptionLbl.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -20),
+            
+            
+            doneButton.topAnchor.constraint(equalTo: card.topAnchor,constant: 40),
+            doneButton.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -20),
+             doneButton.heightAnchor.constraint(equalToConstant: 30),
+            doneButton.widthAnchor.constraint(equalToConstant: 30),
+            
+            
+            
         ])
     }
     

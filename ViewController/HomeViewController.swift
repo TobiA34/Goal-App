@@ -11,7 +11,9 @@ import CoreData
 
 class HomeViewController: UIViewController {
     
+ 
     private var noteViewModel: NoteViewModel!
+    var filteredNote = [Note]()
  
     var firstLoad = true
     
@@ -26,11 +28,17 @@ class HomeViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+ 
     let tableview: UITableView = {
         let tableview = UITableView()
         tableview.translatesAutoresizingMaskIntoConstraints = false
         tableview.separatorStyle = .none
-        tableview.backgroundColor = .clear
+        tableview.backgroundColor =  UIColor(named: "background")
         tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 44
         tableview.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellID)
@@ -47,40 +55,63 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableview.dataSource = self
-        setupView()
-         navigationController?.navigationBar.barTintColor = .white
+        searchBar.delegate = self
+         setupView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
-        navigationItem.rightBarButtonItem?.tintColor = .black
+        navigationController?.navigationBar.barTintColor =  UIColor(named: "background")
         tableview.reloadData()
         requestPermission()
     }
     
     func requestPermission() -> Void {
-       UNUserNotificationCenter
-           .current()
-           .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
-               if granted == true && error == nil {
-                   // We have permission!
-               }
-       }
-   }
+        UNUserNotificationCenter
+            .current()
+            .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
+                if granted == true && error == nil {
+                    // We have permission!
+                }
+            }
+    }
     
     func setupView() {
         view.backgroundColor = UIColor(hexString: "#F2F2F2")
         view.addSubview(tableview)
-        
+        view.addSubview(searchBar)
+
         NSLayoutConstraint.activate([
-            tableview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+ 
+            tableview.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             tableview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableview.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
 }
+
+extension HomeViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchText.isEmpty {
+            noteViewModel.fetchSearchedData(searchText)
+        } else {
+            noteViewModel.noteList =  noteViewModel.getAllUnCompletedNote()
+         }
+           tableview.reloadData()
+    }
+    
+}
+
+
+ 
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  noteViewModel.noteList.count
+        
+        return noteViewModel.noteList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,7 +143,8 @@ extension HomeViewController: UITableViewDataSource {
     
 }
 
- 
+
+
 
 extension HomeViewController: ListTableViewCellDelegate {
     
@@ -122,7 +154,7 @@ extension HomeViewController: ListTableViewCellDelegate {
             .asyncAfter(deadline: .now() + 0.25) {
                 self.noteViewModel.complete(true, note: note)
                 self.tableview.deleteRows(at: [indexPath], with: .automatic)
-        }
+            }
         // Here we want to set the completed flag to true in db
     }
 }

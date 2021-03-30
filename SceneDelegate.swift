@@ -25,10 +25,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let homeVc = HomeViewController()
             homeVc.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
             homeVc.title = "Home"
-            
+ 
             let completedGoalVc = CompletedGoalViewController()
             completedGoalVc.tabBarItem = UITabBarItem(title: "Completed Goals", image: UIImage(systemName: "target"), tag: 1)
             completedGoalVc.title = "Completed Goal"
+ 
       
 
             let controllers = [homeVc, completedGoalVc]

@@ -61,13 +61,22 @@ class NoteViewModel {
         }
     }
  
-    func complete(_ val: Bool, note: Note) {
+    
+    func getAllCompletedNote() -> [Note] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+ 
+        fetchRequest.predicate =  NSPredicate(format: "isCompleted == %@", NSNumber(value: true))
+        return try! (context.fetch(fetchRequest) as? [Note] ?? [])
         
+  
+    }
+    
+    func undo(_ val: Bool, completedNote: Note) {
         
         do {
-            note.setValue(val, forKey: "isCompleted")
+            completedNote.setValue(val, forKey: "isCompleted")
             try context.save()
-            self.noteList = getAllUnCompletedNote()
+            self.noteList = getAllCompletedNote()
             
         }
         catch {
@@ -76,29 +85,40 @@ class NoteViewModel {
 
     }
     
+    func complete(_ val: Bool, note: Note) {
+        do {
+            note.setValue(val, forKey: "isCompleted")
+            try context.save()
+            self.noteList = getAllUnCompletedNote()
+        }
+        catch {
+            print("context save error")
+        }
+    }
+ 
     
     func getAllUnCompletedNote() -> [Note] {
-        
-
-        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
  
         fetchRequest.predicate =  NSPredicate(format: "isCompleted == %@", false)
         return try! (context.fetch(fetchRequest) as? [Note] ?? [])
-        
-  
     }
     
-    func getAllCompletedNote() -> [Note] {
-        
-
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
  
-        fetchRequest.predicate =  NSPredicate(format: "isCompleted == %@", NSNumber(value: true))
-        return try! (context.fetch(fetchRequest) as? [Note] ?? [])
+ 
+ 
+   
+    
+    
+    func fetchSearchedData(_ searchText: String){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Note")
+         fetchRequest.predicate = NSPredicate(format: "title contains[c] '\(searchText)'")
         
-  
-    }
+        do {
+            noteList = try context.fetch(fetchRequest) as! [Note]
+        } catch let error {
+            print("Could not fetch. \(error)")
+        }
+     }
 }
 

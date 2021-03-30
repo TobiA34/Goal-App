@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+
  
 class CompletedGoalViewController: UIViewController {
 
@@ -28,7 +29,7 @@ class CompletedGoalViewController: UIViewController {
         let tableview = UITableView()
         tableview.translatesAutoresizingMaskIntoConstraints = false
         tableview.separatorStyle = .none
-        tableview.backgroundColor = .clear
+        tableview.backgroundColor =  UIColor(named: "background")
         tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 44
         tableview.register(CompletedNoteTableViewCell.self, forCellReuseIdentifier: CompletedNoteTableViewCell.cellID)
@@ -46,10 +47,9 @@ class CompletedGoalViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableview.dataSource = self
         setupView()
-         navigationController?.navigationBar.barTintColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
-        navigationItem.rightBarButtonItem?.tintColor = .black
-        tableview.reloadData()
+        navigationController?.navigationBar.barTintColor =  UIColor(named: "background")
+         tableview.reloadData()
         requestPermission()
     }
     
@@ -79,12 +79,14 @@ class CompletedGoalViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         noteViewModel.noteList = noteViewModel.getAllCompletedNote()
+        tableview.reloadData()
      }
     
 }
 
 extension CompletedGoalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return   noteViewModel.noteList.count
     }
     
@@ -92,14 +94,24 @@ extension CompletedGoalViewController: UITableViewDataSource {
         
         let completedNote = noteViewModel.noteList[indexPath.row]
         let cell = tableview.dequeueReusableCell(withIdentifier: CompletedNoteTableViewCell.cellID,for: indexPath) as? CompletedNoteTableViewCell
-        cell?.configure(completedNote: completedNote)
+        cell?.configure(completedNote: completedNote, isTap: noteViewModel.doesExist(item: completedNote), indexPath: indexPath, delegate: self)
         cell?.selectionStyle = UITableViewCell.SelectionStyle.none
         cell?.backgroundColor = .clear
         return cell!
     }
-     
+}
+    
+extension CompletedGoalViewController: CompletedNoteTableViewCellDelegate {
+    func undo(completedNote note: Note, at indexPath: IndexPath) {
+            DispatchQueue
+                .main
+                .asyncAfter(deadline: .now() + 0.25) {
+                    self.noteViewModel.undo(false, completedNote: note)
+                     self.tableview.deleteRows(at: [indexPath], with: .automatic)
+            }
+            // Here we want to set the completed flag to true in db
+        }
     }
-    
-    
+
 
 
