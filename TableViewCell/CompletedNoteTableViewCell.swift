@@ -33,13 +33,12 @@ class CompletedNoteTableViewCell: UITableViewCell {
     let doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.backgroundColor = UIColor(hexString: "#34F855")
+        doneButton.backgroundColor = .lightGray
         doneButton.layer.cornerRadius = 19
         
         doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         
-        doneButton.setImage(UIImage(named: "tick"), for: .normal)
-        return doneButton
+         return doneButton
     }()
     
     let descriptionLbl: UILabel = {
@@ -64,6 +63,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         
         if let selectedNote = completedNote,
            let indexPath = indexPath {
+            doneButton.setImage(selectedNote.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
             delegate?.undo(completedNote: selectedNote, at: indexPath)
         }
     }
@@ -76,7 +76,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         self.indexPath = indexPath
         titleLbl.text = completedNote.title
         descriptionLbl.text = completedNote.desc
-        doneButton.setImage(UIImage(named: "white-tick"), for: .normal)
+        doneButton.setImage(completedNote.isCompleted ?  #imageLiteral(resourceName: "green-tick") : #imageLiteral(resourceName: "white-tick"), for: .normal)
         
     }
     override func prepareForReuse() {
