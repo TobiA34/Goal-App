@@ -64,14 +64,12 @@ class CompletedNoteTableViewCell: UITableViewCell {
         
         if let selectedNote = completedNote,
            let indexPath = indexPath {
-//            doneButton.setImage(selectedNote.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
             delegate?.undo(completedNote: selectedNote, at: indexPath)
         }
     }
     
     
-    func configure(completedNote: Note, isTap: Bool, indexPath: IndexPath,
-                   delegate: CompletedNoteTableViewCellDelegate?){
+    func configure(completedNote: Note, isTap: Bool, indexPath: IndexPath, delegate: CompletedNoteTableViewCellDelegate?) {
         setupView()
         self.delegate = delegate
         self.completedNote = completedNote
@@ -79,9 +77,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         titleLbl.text = completedNote.title
         descriptionLbl.text = completedNote.desc
         doneButton.setImage(UIImage(named: "white-tick"), for: .normal)
-//        doneButton.setImage(!completedNote.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
         
- 
     }
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -120,13 +116,14 @@ private extension CompletedNoteTableViewCell {
             
             descriptionLbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor,constant: 10),
             descriptionLbl.leadingAnchor.constraint(equalTo: titleLbl.leadingAnchor),
-            descriptionLbl.trailingAnchor.constraint(equalTo: titleLbl.trailingAnchor),
+            descriptionLbl.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor),
             descriptionLbl.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -20),
             
             
             doneButton.topAnchor.constraint(equalTo: card.topAnchor,constant: 40),
+            doneButton.leadingAnchor.constraint(equalTo: descriptionLbl.trailingAnchor,constant: 20),
             doneButton.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -20),
-             doneButton.heightAnchor.constraint(equalToConstant: 30),
+            doneButton.heightAnchor.constraint(equalToConstant: 30),
             doneButton.widthAnchor.constraint(equalToConstant: 30),
             
             

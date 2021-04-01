@@ -48,6 +48,7 @@ class FormViewController: UIViewController {
     let titleTextField: UITextField = {
         let titleTextField = UITextField()
         titleTextField.backgroundColor = .gray
+        titleTextField.textColor = .black
         titleTextField.attributedPlaceholder = NSAttributedString(string: "[Enter title]", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         titleTextField.backgroundColor = UIColor(hexString: "#D8D8D8")
         let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 2.0))
@@ -58,23 +59,24 @@ class FormViewController: UIViewController {
         return titleTextField
     }()
     
-    let catagoryLabel:UILabel = {
-        let label = UILabel()
-        label.text = "Choose category"
-        label.font = label.font.withSize(25)
-        label.textColor = UIColor(named: "textColor")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let categoryLabel:UILabel = {
+        let categoryLabel = UILabel()
+        categoryLabel.text = "Choose category"
+        categoryLabel.font = categoryLabel.font.withSize(25)
+        categoryLabel.textColor = UIColor(named: "textColor")
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        return categoryLabel
     }()
     
-    let catagoryTextField: UITextField = {
-        let catagoryTextField = UITextField()
-        catagoryTextField.backgroundColor =  .gray/* #f9f9f9 */
-        catagoryTextField.placeholder = "[pick a category]"
- 
-        catagoryTextField.font = catagoryTextField.font?.withSize(20)
-        catagoryTextField.translatesAutoresizingMaskIntoConstraints = false
-        return catagoryTextField
+    let categoryTextField: UITextField = {
+        let categoryTextField = UITextField()
+        categoryTextField.backgroundColor = UIColor(hexString: "#D8D8D8")
+        categoryTextField.placeholder = "[pick a category]"
+        categoryTextField.textColor = .black
+
+        categoryTextField.font = categoryTextField.font?.withSize(20)
+        categoryTextField.translatesAutoresizingMaskIntoConstraints = false
+        return categoryTextField
     }()
     
     let endDateLabel: UILabel = {
@@ -104,6 +106,8 @@ class FormViewController: UIViewController {
     let descriptionTextView: UITextView = {
         let descriptionTextView = UITextView()
         descriptionTextView.backgroundColor = UIColor(hexString: "#D8D8D8")
+        descriptionTextView.textColor = .black
+
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         descriptionTextView.textContainerInset = UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 0)
         descriptionTextView.layer.cornerRadius = 19
@@ -137,7 +141,7 @@ class FormViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupView()
-        validateForm(title: titleTextField, description: descriptionTextView, catagory: catagoryTextField)
+        validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
         titleTextField.delegate = self
         descriptionTextView.delegate = self
      }
@@ -179,7 +183,7 @@ extension FormViewController {
     @objc func save() {
         
         if isHidden{
-            validateForm(title: titleTextField, description: descriptionTextView, catagory: catagoryTextField)
+            validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
         } else {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
@@ -189,7 +193,7 @@ extension FormViewController {
             newNote.title = titleTextField.text
             newNote.desc = descriptionTextView.text
             newNote.endDate =  endDatePicker.date
-            newNote.category = catagoryTextField.text
+            newNote.category = categoryTextField.text
             do
             {
                 try context.save()
@@ -216,8 +220,8 @@ extension FormViewController {
         view.addSubview(card)
         card.addSubview(titleLbl)
         card.addSubview(titleTextField)
-        card.addSubview(catagoryLabel)
-        card.addSubview(catagoryTextField)
+        card.addSubview(categoryLabel)
+        card.addSubview(categoryTextField)
         card.addSubview(descriptionLbl)
         card.addSubview(descriptionTextView)
         card.addSubview(endDatePicker)
@@ -240,18 +244,18 @@ extension FormViewController {
             titleTextField.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -10),
             titleTextField.heightAnchor.constraint(equalToConstant: 45),
             
-            catagoryLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
-            catagoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            catagoryLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 200),
+            categoryLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
+            categoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            categoryLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 200),
             
             
-            catagoryTextField.topAnchor.constraint(equalTo: catagoryLabel.bottomAnchor, constant: 15),
-            catagoryTextField.leadingAnchor.constraint(equalTo: card.leadingAnchor, constant: 20),
-            catagoryTextField.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -20),
-            catagoryTextField.heightAnchor.constraint(equalToConstant: 50),
-            catagoryTextField.widthAnchor.constraint(equalToConstant: 350),
+            categoryTextField.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 15),
+            categoryTextField.leadingAnchor.constraint(equalTo: card.leadingAnchor, constant: 20),
+            categoryTextField.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -20),
+            categoryTextField.heightAnchor.constraint(equalToConstant: 50),
+            categoryTextField.widthAnchor.constraint(equalToConstant: 350),
             
-            endDateLabel.topAnchor.constraint(equalTo: catagoryTextField.bottomAnchor, constant: 20),
+            endDateLabel.topAnchor.constraint(equalTo: categoryTextField.bottomAnchor, constant: 20),
             endDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             endDateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 200),
             
@@ -285,7 +289,7 @@ private extension FormViewController {
         let catagoryPicker = UIPickerView()
         catagoryPicker.delegate = self
         
-        catagoryTextField.inputView = catagoryPicker
+        categoryTextField.inputView = catagoryPicker
     }
     
     private func createToolBar(){
@@ -295,7 +299,7 @@ private extension FormViewController {
         
         toolBar.setItems([doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
-        catagoryTextField.inputAccessoryView = toolBar
+        categoryTextField.inputAccessoryView = toolBar
         descriptionTextView.inputAccessoryView = toolBar
         titleTextField.inputAccessoryView = toolBar
     }
@@ -334,20 +338,20 @@ extension FormViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCategory = catagorysName[row]
-        catagoryTextField.text = selectedCategory?.title
+        categoryTextField.text = selectedCategory?.title
     }
 }
 
 extension FormViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        validateForm(title: titleTextField, description: descriptionTextView, catagory: catagoryTextField)
+        validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
         
     }
 }
 
 extension FormViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
-        validateForm(title: titleTextField, description: descriptionTextView, catagory: catagoryTextField)
+        validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
     }
 }
 

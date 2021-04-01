@@ -213,15 +213,15 @@ private extension ListTableViewCell {
             descriptionLbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor,constant: 10),
             descriptionLbl.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 60),
             descriptionLbl.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor,constant: -20),
-//            descriptionLbl.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -10),
-//
-    
+ 
     
             doneButton.topAnchor.constraint(equalTo: card.topAnchor,constant: 40),
              doneButton.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -60),
+            doneButton.leadingAnchor.constraint(equalTo: descriptionLbl.trailingAnchor,constant: 60),
+            
             doneButton.heightAnchor.constraint(equalToConstant: 30),
             doneButton.widthAnchor.constraint(equalToConstant: 30),
-            
+      
             dateView.topAnchor.constraint(equalTo: descriptionLbl.bottomAnchor,constant: 10),
             dateView.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 40),
             dateView.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -100),
