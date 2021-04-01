@@ -142,7 +142,13 @@ class ListTableViewCell: UITableViewCell {
         self.delegate = delegate
         self.note = note
         self.indexPath = indexPath
-        doneButton.setImage(!note.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
+        if !note.isCompleted {
+            doneButton.backgroundColor = UIColor(hexString: "#C4C4C4")
+            doneButton.setImage(UIImage(named: "white-tick"), for: .normal)
+        } else {
+            doneButton.backgroundColor = UIColor(hexString: "#34F855")
+            doneButton.setImage(UIImage(named: "green-tick"), for: .normal)
+        }
      }
     
     @objc func done(){
