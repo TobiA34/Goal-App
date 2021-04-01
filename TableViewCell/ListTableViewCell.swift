@@ -99,6 +99,7 @@ class ListTableViewCell: UITableViewCell {
         let healthImgvw = UIImageView()
         healthImgvw.translatesAutoresizingMaskIntoConstraints = false
         healthImgvw.image = UIImage(named: "tick")
+        healthImgvw.tintColor = .white
         return healthImgvw
     }()
     
@@ -117,7 +118,22 @@ class ListTableViewCell: UITableViewCell {
                    delegate: ListTableViewCellDelegate?){
         titleLbl.text = note.title
         descriptionLbl.text = note.desc
-        healthImgvw.image = UIImage(named: note.category ?? "")
+
+        switch note.category {
+        case Category.finance.title:
+            healthImgvw.image = Category.finance.icon
+            healthView.backgroundColor = UIColor(hexString: "#5995ED")
+        case Category.health.title:
+            healthImgvw.image = Category.health.icon
+            healthView.backgroundColor = UIColor(hexString: "#EF476F")
+        case Category.personal.title:
+            healthImgvw.image = Category.personal.icon
+            healthView.backgroundColor = UIColor(hexString: "#F4D35E")
+        case .none:
+            break
+        case .some(_):
+            break
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/YYYY"
         if let date = note.endDate{

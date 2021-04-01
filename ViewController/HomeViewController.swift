@@ -115,7 +115,7 @@ extension HomeViewController: UISearchBarDelegate {
             noteViewModel.fetchSearchedData(searchText)
         } else {
             noteViewModel.noteList =  noteViewModel.getAllUnCompletedNote()
-         }
+          }
            tableview.reloadData()
     }
     

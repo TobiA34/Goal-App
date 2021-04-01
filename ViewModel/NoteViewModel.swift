@@ -45,11 +45,6 @@ class NoteViewModel {
     
     
     func remove(note:Note) {
-//        guard let appDelegate =
-//                UIApplication.shared.delegate as? AppDelegate else {
-//            return
-//        }
-//        let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Note") // Find this name in your .xcdatamodeld file
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         

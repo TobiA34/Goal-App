@@ -47,7 +47,7 @@ class CompletedGoalViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableview.dataSource = self
         setupView()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
+    
         navigationController?.navigationBar.barTintColor =  UIColor(named: "background")
          tableview.reloadData()
         requestPermission()

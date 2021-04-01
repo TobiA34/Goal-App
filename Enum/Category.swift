@@ -31,11 +31,11 @@ extension Category {
    var icon: UIImage? {
        switch self {
        case .personal:
-           return UIImage(systemName: "person")
+           return UIImage(systemName: "pencil")
        case .finance:
-           return UIImage(systemName: "dollarsign.square")
+           return UIImage(systemName: "dollarsign.circle")
        case .health:
-           return UIImage(systemName: "heart")
+           return UIImage(systemName: "heart.fill")
         }
    }
    
