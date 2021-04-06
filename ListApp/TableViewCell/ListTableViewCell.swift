@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ListTableViewCellDelegate: class {
+protocol ListTableViewCellDelegate: AnyObject {
     func didComplete(note: Note, at indexPath: IndexPath)
 }
  
@@ -226,6 +226,8 @@ private extension ListTableViewCell {
             dateLbl.centerYAnchor.constraint(equalTo: dateView.centerYAnchor)
 
         ])
+               
     }
     
+
 }

@@ -7,14 +7,6 @@
 
 import UIKit
 import CoreData
-import UserNotifications
-
-struct LocalNotification {
-    var id: String
-    var title: String
-    var body: String
-}
-
 
 class FormViewController: UIViewController {
     
@@ -25,7 +17,6 @@ class FormViewController: UIViewController {
     private var catagorysName = Category.allCases
     private var selectedCategory: Category?
     var isHidden = false
-    let requestIdentifier = "prem"
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -195,14 +186,11 @@ extension FormViewController {
             newNote.desc = descriptionTextView.text
             newNote.endDate =  endDatePicker.date
             newNote.category = categoryTextField.text
-            do
-            {
+            do {
                 try context.save()
                 noteViewModel.noteList.append(newNote)
                 self.navigationController?.popToRootViewController(animated: true)
-            }
-            catch
-            {
+            } catch {
                 print("context save error")
             }
             scheduleNotification()
@@ -355,25 +343,4 @@ extension FormViewController: UITextViewDelegate {
         validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
     }
 }
-
-extension FormViewController: UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        print("Tapped in notification")
-    }
-    
-    //This is key callback to present notification while the app is in foreground
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        print("Notification being triggered")
-        //You can either present alert ,sound or increase badge while the app is in foreground too with ios 10
-        //to distinguish between notifications
-        if notification.request.identifier == requestIdentifier{
-            
-            completionHandler( [.alert,.sound,.badge])
-            
-        }
-    }
-    
-}
+ 

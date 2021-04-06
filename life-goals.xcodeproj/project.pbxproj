@@ -18,6 +18,7 @@
 		BD63E55E25FBA51100FCB17C /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E55D25FBA51100FCB17C /* NoteViewModel.swift */; };
 		BD63E56425FBA84000FCB17C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E56325FBA84000FCB17C /* Color.swift */; };
 		BD73EED126039484001FECF2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD73EED026039484001FECF2 /* Category.swift */; };
+		BD839182261C78FA0052D747 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD839181261C78FA0052D747 /* LocalNotification.swift */; };
 		BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */; };
 		BDA1D323260B877A0045D383 /* CompletedNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D322260B877A0045D383 /* CompletedNoteTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		BD63E55D25FBA51100FCB17C /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		BD63E56325FBA84000FCB17C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BD73EED026039484001FECF2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		BD839181261C78FA0052D747 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalViewController.swift; sourceTree = "<group>"; };
 		BDA1D322260B877A0045D383 /* CompletedNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompletedNoteTableViewCell.swift; path = ListApp/TableViewCell/CompletedNoteTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 		BD82533D261778B200F77788 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BD839181261C78FA0052D747 /* LocalNotification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				BD63E55625FB905E00FCB17C /* FormViewController.swift in Sources */,
 				BD63E53225FB8D1100FCB17C /* AppDelegate.swift in Sources */,
 				BD63E53425FB8D1100FCB17C /* SceneDelegate.swift in Sources */,
+				BD839182261C78FA0052D747 /* LocalNotification.swift in Sources */,
 				BD63E54D25FB8E8D00FCB17C /* ListTableViewCell.swift in Sources */,
 				BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */,
 				BD63E56425FBA84000FCB17C /* Color.swift in Sources */,

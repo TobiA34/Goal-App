@@ -8,11 +8,10 @@
 import UIKit
 
 
-protocol CompletedNoteTableViewCellDelegate: class {
+protocol CompletedNoteTableViewCellDelegate: AnyObject {
     func undo(completedNote: Note, at indexPath: IndexPath)
 }
  
-
 class CompletedNoteTableViewCell: UITableViewCell {
     
     
