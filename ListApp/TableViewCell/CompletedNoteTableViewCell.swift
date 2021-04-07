@@ -11,7 +11,7 @@ import UIKit
 protocol CompletedNoteTableViewCellDelegate: AnyObject {
     func undo(completedNote: Note, at indexPath: IndexPath)
 }
- 
+
 class CompletedNoteTableViewCell: UITableViewCell {
     
     
@@ -20,7 +20,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
     private var completedNote: Note?
     private var indexPath: IndexPath?
     
-    let titleLbl: UILabel = {
+    private let titleLbl: UILabel = {
         let titleLbl = UILabel()
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         titleLbl.font = UIFont.boldSystemFont(ofSize: 18.0)
@@ -29,7 +29,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         return titleLbl
     }()
     
-    let doneButton: UIButton = {
+    private let doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.backgroundColor = .lightGray
@@ -37,10 +37,10 @@ class CompletedNoteTableViewCell: UITableViewCell {
         
         doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         
-         return doneButton
+        return doneButton
     }()
     
-    let descriptionLbl: UILabel = {
+    private let descriptionLbl: UILabel = {
         let descriptionLbl = UILabel()
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.font = descriptionLbl.font.withSize(14)
@@ -50,7 +50,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
     }()
     
     
-    let card: UIView = {
+    private let card: UIView = {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         card.layer.cornerRadius = 19
@@ -62,7 +62,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         
         if let selectedNote = completedNote,
            let indexPath = indexPath {
-            doneButton.setImage(selectedNote.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
+            doneButton.setImage(selectedNote.isCompleted ? UIImage(named: Image.whiteTick) : UIImage(named: Image.greenTick), for: .normal)
             delegate?.undo(completedNote: selectedNote, at: indexPath)
         }
     }
@@ -75,7 +75,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         self.indexPath = indexPath
         titleLbl.text = completedNote.title
         descriptionLbl.text = completedNote.desc
-        doneButton.setImage(completedNote.isCompleted ?  #imageLiteral(resourceName: "green-tick") : #imageLiteral(resourceName: "white-tick"), for: .normal)
+        doneButton.setImage(completedNote.isCompleted ? UIImage(named: Image.greenTick) : UIImage(named: Image.whiteTick), for: .normal)
         
     }
     override func prepareForReuse() {
@@ -83,8 +83,6 @@ class CompletedNoteTableViewCell: UITableViewCell {
         titleLbl.text =  nil
         descriptionLbl.text =  nil
     }
-    
-    
 }
 
 
@@ -100,7 +98,7 @@ private extension CompletedNoteTableViewCell {
         card.addSubview(doneButton)
         
         doneButton.addTarget(self, action: #selector(undoNote), for: .touchUpInside)
-
+        
         
         NSLayoutConstraint.activate([
             
@@ -124,9 +122,6 @@ private extension CompletedNoteTableViewCell {
             doneButton.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -20),
             doneButton.heightAnchor.constraint(equalToConstant: 30),
             doneButton.widthAnchor.constraint(equalToConstant: 30),
-            
-            
-            
         ])
     }
     
