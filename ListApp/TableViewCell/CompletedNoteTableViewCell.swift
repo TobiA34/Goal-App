@@ -62,7 +62,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         
         if let selectedNote = completedNote,
            let indexPath = indexPath {
-            doneButton.setImage(selectedNote.isCompleted ? UIImage(named: Image.whiteTick) : UIImage(named: Image.greenTick), for: .normal)
+            doneButton.setImage(selectedNote.isCompleted ?  Image.whiteTick : Image.greenTick, for: .normal)
             delegate?.undo(completedNote: selectedNote, at: indexPath)
         }
     }
@@ -75,7 +75,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         self.indexPath = indexPath
         titleLbl.text = completedNote.title
         descriptionLbl.text = completedNote.desc
-        doneButton.setImage(completedNote.isCompleted ? UIImage(named: Image.greenTick) : UIImage(named: Image.whiteTick), for: .normal)
+        doneButton.setImage(completedNote.isCompleted ?  Image.greenTick :  Image.whiteTick, for: .normal)
         
     }
     override func prepareForReuse() {

@@ -48,11 +48,11 @@ class ListTableViewCell: UITableViewCell {
     private let doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.backgroundColor = UIColor(hexString: Colour.grey)
+        doneButton.backgroundColor = UIColor(named: "grey")
         doneButton.layer.cornerRadius = 19
         doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
 
-        doneButton.setImage(UIImage(named: Image.tick), for: .normal)
+        doneButton.setImage(Image.tick, for: .normal)
         return doneButton
     }()
     
@@ -89,7 +89,7 @@ class ListTableViewCell: UITableViewCell {
     private var healthImgvw: UIImageView = {
         let healthImgvw = UIImageView()
         healthImgvw.translatesAutoresizingMaskIntoConstraints = false
-        healthImgvw.image = UIImage(named: Image.tick)
+        healthImgvw.image = Image.tick
         healthImgvw.tintColor = .white
         return healthImgvw
     }()
@@ -113,13 +113,13 @@ class ListTableViewCell: UITableViewCell {
         switch note.category {
         case Category.finance.title:
             healthImgvw.image = Category.finance.icon
-            healthView.backgroundColor = UIColor(hexString: Colour.blue)
+            healthView.backgroundColor = UIColor(named: "blue")
         case Category.health.title:
             healthImgvw.image = Category.health.icon
-            healthView.backgroundColor = UIColor(hexString: Colour.pink)
+            healthView.backgroundColor = UIColor(named: "pink")
         case Category.personal.title:
             healthImgvw.image = Category.personal.icon
-            healthView.backgroundColor = UIColor(hexString: Colour.yellow)
+            healthView.backgroundColor = UIColor(named: "yellow")
         case .none:
             break
         case .some(_):
@@ -133,7 +133,7 @@ class ListTableViewCell: UITableViewCell {
         self.delegate = delegate
         self.note = note
         self.indexPath = indexPath
-        doneButton.setImage(note.isCompleted ?  UIImage(named: Image.greenTick) : UIImage(named: Image.whiteTick), for: .normal)
+        doneButton.setImage(note.isCompleted ?   Image.greenTick :  Image.whiteTick, for: .normal)
         setupView()
      }
     
@@ -141,7 +141,7 @@ class ListTableViewCell: UITableViewCell {
         
         if let selectedNote = note,
            let indexPath = indexPath {
-            doneButton.setImage(selectedNote.isCompleted ? UIImage(named: Image.whiteTick) : UIImage(named: Image.greenTick), for: .normal)
+            doneButton.setImage(selectedNote.isCompleted ?  Image.whiteTick :  Image.greenTick, for: .normal)
             delegate?.didComplete(note: selectedNote, at: indexPath)
         }
     }

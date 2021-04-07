@@ -5,11 +5,11 @@
 //  Created by tobi adegoroye on 07/04/2021.
 //
 
-import Foundation
+import UIKit
 
 struct Image {
-    static let tick = "tick"
-    static let whiteTick = "white-tick"
-    static let greenTick = "green-tick"
+    static let tick = UIImage(named: "tick")
+    static let whiteTick = UIImage(named: "white-tick")
+    static let greenTick =  UIImage(named: "green-tick")
 
 }
