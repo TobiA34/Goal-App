@@ -14,9 +14,8 @@ protocol CompletedNoteTableViewCellDelegate: AnyObject {
 
 class CompletedNoteTableViewCell: UITableViewCell {
     
-    
     static let cellID = "CompletedNoteTableViewCell"
-    private var delegate: CompletedNoteTableViewCellDelegate?
+    private weak var delegate: CompletedNoteTableViewCellDelegate?
     private var completedNote: Note?
     private var indexPath: IndexPath?
     
@@ -32,7 +31,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
     private let doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.backgroundColor = .lightGray
+        doneButton.backgroundColor = UIColor(named: "grey")
         doneButton.layer.cornerRadius = 19
         
         doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
@@ -49,7 +48,6 @@ class CompletedNoteTableViewCell: UITableViewCell {
         return descriptionLbl
     }()
     
-    
     private let card: UIView = {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
@@ -58,8 +56,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         return card
     }()
     
-    @objc func undoNote(){
-        
+    @objc func undoNote() {
         if let selectedNote = completedNote,
            let indexPath = indexPath {
             doneButton.setImage(selectedNote.isCompleted ?  Image.whiteTick : Image.greenTick, for: .normal)
@@ -85,20 +82,15 @@ class CompletedNoteTableViewCell: UITableViewCell {
     }
 }
 
-
-
-
 private extension CompletedNoteTableViewCell {
     
     func setupView() {
-        
         contentView.addSubview(card)
         card.addSubview(titleLbl)
         card.addSubview(descriptionLbl)
         card.addSubview(doneButton)
         
         doneButton.addTarget(self, action: #selector(undoNote), for: .touchUpInside)
-        
         
         NSLayoutConstraint.activate([
             
@@ -116,7 +108,6 @@ private extension CompletedNoteTableViewCell {
             descriptionLbl.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor),
             descriptionLbl.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -20),
             
-            
             doneButton.topAnchor.constraint(equalTo: card.topAnchor,constant: 40),
             doneButton.leadingAnchor.constraint(equalTo: descriptionLbl.trailingAnchor,constant: 20),
             doneButton.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -20),
@@ -124,5 +115,4 @@ private extension CompletedNoteTableViewCell {
             doneButton.widthAnchor.constraint(equalToConstant: 30),
         ])
     }
-    
 }

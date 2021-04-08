@@ -39,10 +39,9 @@ class FormViewController: UIViewController {
     
     let titleTextField: UITextField = {
         let titleTextField = UITextField()
-        titleTextField.backgroundColor = .gray
         titleTextField.textColor = .black
         titleTextField.attributedPlaceholder = NSAttributedString(string: "[Enter title]", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-        titleTextField.backgroundColor = UIColor(hexString: "#D8D8D8")
+        titleTextField.backgroundColor = .lightGray
         let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 2.0))
         titleTextField.leftView = leftView
         titleTextField.leftViewMode = .always
@@ -62,9 +61,9 @@ class FormViewController: UIViewController {
     
     let categoryTextField: UITextField = {
         let categoryTextField = UITextField()
-        categoryTextField.backgroundColor = UIColor(hexString: "#D8D8D8")
+        categoryTextField.backgroundColor = UIColor(hex: "#D8D8D8")
         categoryTextField.placeholder = "[pick a category]"
-        categoryTextField.textColor = .black
+        categoryTextField.textColor = UIColor(named: "textColor")
 
         categoryTextField.font = categoryTextField.font?.withSize(20)
         categoryTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -97,7 +96,7 @@ class FormViewController: UIViewController {
     
     let descriptionTextView: UITextView = {
         let descriptionTextView = UITextView()
-        descriptionTextView.backgroundColor = UIColor(hexString: "#D8D8D8")
+        descriptionTextView.backgroundColor = UIColor(named: "grey")
         descriptionTextView.textColor = .black
 
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false

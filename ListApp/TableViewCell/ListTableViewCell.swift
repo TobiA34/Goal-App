@@ -102,6 +102,12 @@ class ListTableViewCell: UITableViewCell {
         return card
     }()
     
+    private func setDoneButtonImage(note:Note) {
+        doneButton.setImage(note.isCompleted ?   Image.greenTick :  Image.whiteTick, for: .normal)
+    }
+    
+    
+  
  
     func configure(note: Note,
                    isTap: Bool,
@@ -133,7 +139,7 @@ class ListTableViewCell: UITableViewCell {
         self.delegate = delegate
         self.note = note
         self.indexPath = indexPath
-        doneButton.setImage(note.isCompleted ?   Image.greenTick :  Image.whiteTick, for: .normal)
+        setDoneButtonImage(note: note)
         setupView()
      }
     
@@ -145,7 +151,6 @@ class ListTableViewCell: UITableViewCell {
             delegate?.didComplete(note: selectedNote, at: indexPath)
         }
     }
-    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -218,8 +223,5 @@ private extension ListTableViewCell {
             dateLbl.centerYAnchor.constraint(equalTo: dateView.centerYAnchor)
 
         ])
-               
     }
-    
-
 }

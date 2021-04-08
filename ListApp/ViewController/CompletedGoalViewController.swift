@@ -64,7 +64,7 @@ class CompletedGoalViewController: UIViewController {
    }
     
     func setupView() {
-        view.backgroundColor = UIColor(hexString: "#F2F2F2")
+        view.backgroundColor = UIColor(hex: "#F2F2F2")
         view.addSubview(tableview)
         
         NSLayoutConstraint.activate([

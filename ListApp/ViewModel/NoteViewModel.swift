@@ -8,31 +8,24 @@
 import UIKit
 import CoreData
 
-class NoteViewModel {
+final class NoteViewModel {
     
     var noteList = [Note]()
-     var isComplete = false
-    
+ 
     private var context: NSManagedObjectContext!
     
     init(context: NSManagedObjectContext) {
         self.context = context
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
     }
     
     func fetchAllData() -> [Note] {
         // get everything in the entity named Review
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
         return try! context.fetch(fetchRequest) as? [Note] ?? []
     }
     
     func getItem(with title: String) -> [Note] {
         //perform a query to get an item by its name
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
         fetchRequest.predicate = NSPredicate(format: "title == %@", title)
         return try! (context.fetch(fetchRequest) as? [Note] ?? [])
@@ -45,13 +38,12 @@ class NoteViewModel {
     
     
     func remove(note:Note) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Note") // Find this name in your .xcdatamodeld file
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Note")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
             try context.execute(deleteRequest)
         } catch let error as NSError {
-            // TODO: handle the error
             print(error.localizedDescription)
         }
     }
@@ -98,12 +90,6 @@ class NoteViewModel {
         fetchRequest.predicate =  NSPredicate(format: "isCompleted == %@", false)
         return try! (context.fetch(fetchRequest) as? [Note] ?? [])
     }
-    
- 
- 
- 
-   
-    
     
     func fetchSearchedData(_ searchText: String){
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Note")

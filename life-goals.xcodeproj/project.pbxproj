@@ -18,7 +18,7 @@
 		BD63E54D25FB8E8D00FCB17C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E54C25FB8E8D00FCB17C /* ListTableViewCell.swift */; };
 		BD63E55625FB905E00FCB17C /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E55525FB905E00FCB17C /* FormViewController.swift */; };
 		BD63E55E25FBA51100FCB17C /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E55D25FBA51100FCB17C /* NoteViewModel.swift */; };
-		BD63E56425FBA84000FCB17C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E56325FBA84000FCB17C /* Color.swift */; };
+		BD63E56425FBA84000FCB17C /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */; };
 		BD73EED126039484001FECF2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD73EED026039484001FECF2 /* Category.swift */; };
 		BD839182261C78FA0052D747 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD839181261C78FA0052D747 /* LocalNotification.swift */; };
 		BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */; };
@@ -39,7 +39,7 @@
 		BD63E54C25FB8E8D00FCB17C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = ListApp/TableViewCell/ListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		BD63E55525FB905E00FCB17C /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		BD63E55D25FBA51100FCB17C /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
-		BD63E56325FBA84000FCB17C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		BD73EED026039484001FECF2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		BD839181261C78FA0052D747 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalViewController.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		BD63E56225FBA83300FCB17C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				BD63E56325FBA84000FCB17C /* Color.swift */,
+				BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -227,7 +227,7 @@
 				BD839182261C78FA0052D747 /* LocalNotification.swift in Sources */,
 				BD63E54D25FB8E8D00FCB17C /* ListTableViewCell.swift in Sources */,
 				BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */,
-				BD63E56425FBA84000FCB17C /* Color.swift in Sources */,
+				BD63E56425FBA84000FCB17C /* UIColor+HexString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

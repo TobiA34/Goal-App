@@ -90,7 +90,7 @@ class HomeViewController: UIViewController {
     
     func setupView() {
         createToolBar()
-        view.backgroundColor = UIColor(hexString: "#F2F2F2")
+        view.backgroundColor = UIColor(hex: "#F2F2F2")
         view.addSubview(tableview)
         view.addSubview(searchBar)
         
