@@ -24,14 +24,14 @@ class CompletedNoteTableViewCell: UITableViewCell {
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         titleLbl.font = UIFont.boldSystemFont(ofSize: 18.0)
         titleLbl.numberOfLines = 0
-        titleLbl.textColor = UIColor(named: "textColor")
+        titleLbl.textColor = Colour.textColour
         return titleLbl
     }()
     
     private let doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.backgroundColor = UIColor(named: "grey")
+        doneButton.backgroundColor = Colour.grey
         doneButton.layer.cornerRadius = 19
         
         doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
@@ -44,7 +44,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.font = descriptionLbl.font.withSize(14)
         descriptionLbl.numberOfLines = 0
-        descriptionLbl.textColor = UIColor(named: "textColor")
+        descriptionLbl.textColor = Colour.textColour
         return descriptionLbl
     }()
     
@@ -52,7 +52,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         card.layer.cornerRadius = 19
-        card.backgroundColor = UIColor(named: "card")
+        card.backgroundColor = Colour.cardColour
         return card
     }()
     
@@ -79,6 +79,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
         super.prepareForReuse()
         titleLbl.text =  nil
         descriptionLbl.text =  nil
+        doneButton.setImage(nil, for: .normal)
     }
 }
 

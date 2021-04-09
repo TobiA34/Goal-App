@@ -23,7 +23,7 @@ class ListTableViewCell: UITableViewCell {
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         titleLbl.font = UIFont.boldSystemFont(ofSize: 18.0)
         titleLbl.numberOfLines = 0
-        titleLbl.textColor = UIColor(named: "textColor")
+        titleLbl.textColor = Colour.textColour
         return titleLbl
     }()
     
@@ -32,7 +32,7 @@ class ListTableViewCell: UITableViewCell {
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.font = descriptionLbl.font.withSize(14)
         descriptionLbl.numberOfLines = 0
-        descriptionLbl.textColor = UIColor(named: "textColor")
+        descriptionLbl.textColor = Colour.textColour
         return descriptionLbl
     }()
     
@@ -45,10 +45,10 @@ class ListTableViewCell: UITableViewCell {
     
  
     
-    private let doneButton: UIButton = {
+    private var doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.backgroundColor = UIColor(named: "grey")
+        doneButton.backgroundColor = Colour.grey
         doneButton.layer.cornerRadius = 19
         doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
 
@@ -72,7 +72,6 @@ class ListTableViewCell: UITableViewCell {
         dateView.layer.cornerRadius = 16
         dateView.clipsToBounds = true
         dateView.backgroundColor = .green
-
         return dateView
     }()
     
@@ -81,7 +80,7 @@ class ListTableViewCell: UITableViewCell {
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.font = descriptionLbl.font.withSize(14)
         descriptionLbl.numberOfLines = 0
-        descriptionLbl.textColor = UIColor(named: "textColor")
+        descriptionLbl.textColor = Colour.textColour
         return descriptionLbl
     }()
     
@@ -98,15 +97,14 @@ class ListTableViewCell: UITableViewCell {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         card.layer.cornerRadius = 19
-        card.backgroundColor = UIColor(named: "card")
+        card.backgroundColor = Colour.cardColour
         return card
     }()
     
     private func setDoneButtonImage(note:Note) {
         doneButton.setImage(note.isCompleted ?   Image.greenTick :  Image.whiteTick, for: .normal)
     }
-    
-    
+ 
   
  
     func configure(note: Note,
@@ -119,13 +117,13 @@ class ListTableViewCell: UITableViewCell {
         switch note.category {
         case Category.finance.title:
             healthImgvw.image = Category.finance.icon
-            healthView.backgroundColor = UIColor(named: "blue")
+            healthView.backgroundColor = Colour.blue
         case Category.health.title:
             healthImgvw.image = Category.health.icon
-            healthView.backgroundColor = UIColor(named: "pink")
+            healthView.backgroundColor = Colour.pink
         case Category.personal.title:
             healthImgvw.image = Category.personal.icon
-            healthView.backgroundColor = UIColor(named: "yellow")
+            healthView.backgroundColor = Colour.yellow
         case .none:
             break
         case .some(_):
@@ -160,6 +158,7 @@ class ListTableViewCell: UITableViewCell {
         dateLbl.text = nil
         note = nil
         indexPath = nil
+        doneButton.setImage(nil, for: .normal)
     }
 }
 

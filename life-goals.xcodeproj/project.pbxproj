@@ -23,6 +23,7 @@
 		BD839182261C78FA0052D747 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD839181261C78FA0052D747 /* LocalNotification.swift */; };
 		BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */; };
 		BDA1D323260B877A0045D383 /* CompletedNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D322260B877A0045D383 /* CompletedNoteTableViewCell.swift */; };
+		BDB1C9512620A3260026D128 /* Colour.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1C9502620A3260026D128 /* Colour.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		BD839181261C78FA0052D747 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalViewController.swift; sourceTree = "<group>"; };
 		BDA1D322260B877A0045D383 /* CompletedNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompletedNoteTableViewCell.swift; path = ListApp/TableViewCell/CompletedNoteTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		BDB1C9502620A3260026D128 /* Colour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colour.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				BD839181261C78FA0052D747 /* LocalNotification.swift */,
 				BD1B1991261DC155005E93F5 /* DateFormat.swift */,
 				BD1B1994261DC218005E93F5 /* Image.swift */,
+				BDB1C9502620A3260026D128 /* Colour.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD63E55E25FBA51100FCB17C /* NoteViewModel.swift in Sources */,
+				BDB1C9512620A3260026D128 /* Colour.swift in Sources */,
 				BDA1D323260B877A0045D383 /* CompletedNoteTableViewCell.swift in Sources */,
 				BD73EED126039484001FECF2 /* Category.swift in Sources */,
 				BD63E53625FB8D1100FCB17C /* HomeViewController.swift in Sources */,

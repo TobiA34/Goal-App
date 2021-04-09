@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         let tableview = UITableView()
         tableview.translatesAutoresizingMaskIntoConstraints = false
         tableview.separatorStyle = .none
-        tableview.backgroundColor =  UIColor(named: "background")
+        tableview.backgroundColor = Colour.background
         tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 44
         tableview.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellID)
@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
         searchBar.delegate = self
         setupView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
-        navigationController?.navigationBar.barTintColor =  UIColor(named: "background")
+        navigationController?.navigationBar.barTintColor =  Colour.background
         tableview.reloadData()
         requestPermission()
     }
@@ -90,7 +90,7 @@ class HomeViewController: UIViewController {
     
     func setupView() {
         createToolBar()
-        view.backgroundColor = UIColor(hex: "#F2F2F2")
+        view.backgroundColor = Colour.lightGrey
         view.addSubview(tableview)
         view.addSubview(searchBar)
         

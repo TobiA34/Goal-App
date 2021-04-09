@@ -33,7 +33,7 @@ class FormViewController: UIViewController {
         let titleLbl = UILabel()
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         titleLbl.text = "Title"
-        titleLbl.textColor = UIColor(named: "textColor")
+        titleLbl.textColor = Colour.textColour
         return titleLbl
     }()
     
@@ -54,16 +54,16 @@ class FormViewController: UIViewController {
         let categoryLabel = UILabel()
         categoryLabel.text = "Choose category"
         categoryLabel.font = categoryLabel.font.withSize(25)
-        categoryLabel.textColor = UIColor(named: "textColor")
+        categoryLabel.textColor = Colour.textColour
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         return categoryLabel
     }()
     
     let categoryTextField: UITextField = {
         let categoryTextField = UITextField()
-        categoryTextField.backgroundColor = UIColor(hex: "#D8D8D8")
+        categoryTextField.backgroundColor = Colour.lightGrey
         categoryTextField.placeholder = "[pick a category]"
-        categoryTextField.textColor = UIColor(named: "textColor")
+        categoryTextField.textColor = Colour.textColour
 
         categoryTextField.font = categoryTextField.font?.withSize(20)
         categoryTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +73,7 @@ class FormViewController: UIViewController {
     let endDateLabel: UILabel = {
         let endDateLabel = UILabel()
         endDateLabel.text = "Choose end date"
-        endDateLabel.textColor = UIColor(named: "textColor")
+        endDateLabel.textColor =  Colour.textColour
         endDateLabel.font = endDateLabel.font.withSize(25)
         endDateLabel.translatesAutoresizingMaskIntoConstraints = false
         return endDateLabel
@@ -89,14 +89,13 @@ class FormViewController: UIViewController {
         let descriptionLbl = UILabel()
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.text = "Description"
-        descriptionLbl.textColor = UIColor(named: "textColor")
-
+        descriptionLbl.textColor =  Colour.textColour
         return descriptionLbl
     }()
     
     let descriptionTextView: UITextView = {
         let descriptionTextView = UITextView()
-        descriptionTextView.backgroundColor = UIColor(named: "grey")
+        descriptionTextView.backgroundColor =  Colour.grey
         descriptionTextView.textColor = .black
 
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,8 +107,7 @@ class FormViewController: UIViewController {
     let card: UIView = {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
-        card.backgroundColor = UIColor(named: "card")
-        
+        card.backgroundColor =  Colour.cardColour
         card.layer.cornerRadius = 19
         return card
     }()
