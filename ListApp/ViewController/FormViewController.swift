@@ -319,12 +319,12 @@ extension FormViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return catagorysName[row].title
+        return catagorysName[row].rawValue
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCategory = catagorysName[row]
-        categoryTextField.text = selectedCategory?.title
+        categoryTextField.text = selectedCategory?.rawValue
     }
 }
 

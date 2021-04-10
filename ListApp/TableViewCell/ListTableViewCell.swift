@@ -114,24 +114,16 @@ class ListTableViewCell: UITableViewCell {
         titleLbl.text = note.title
         descriptionLbl.text = note.desc
 
-        switch note.category {
-        case Category.finance.title:
-            healthImgvw.image = Category.finance.icon
-            healthView.backgroundColor = Colour.blue
-        case Category.health.title:
-            healthImgvw.image = Category.health.icon
-            healthView.backgroundColor = Colour.pink
-        case Category.personal.title:
-            healthImgvw.image = Category.personal.icon
-            healthView.backgroundColor = Colour.yellow
-        case .none:
-            break
-        case .some(_):
-            break
+        if  let rawCategory = note.category,
+            let category = Category(rawValue: rawCategory) {
+            
+            healthImgvw.image = category.icon
+            healthView.backgroundColor = category.colour
         }
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormat.basic
-        if let date = note.endDate{
+        if let date = note.endDate {
             dateLbl.text = dateFormatter.string(from: date)
         }
         self.delegate = delegate
