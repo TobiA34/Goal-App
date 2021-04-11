@@ -63,7 +63,7 @@ class FormViewController: UIViewController {
         let categoryTextField = UITextField()
         categoryTextField.backgroundColor = Colour.lightGrey
         categoryTextField.placeholder = "[pick a category]"
-        categoryTextField.textColor = Colour.textColour
+        categoryTextField.textColor = .black
 
         categoryTextField.font = categoryTextField.font?.withSize(20)
         categoryTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -133,6 +133,7 @@ class FormViewController: UIViewController {
         validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
         titleTextField.delegate = self
         descriptionTextView.delegate = self
+        categoryTextField.resignFirstResponder()
      }
     
 }
@@ -158,13 +159,40 @@ extension FormViewController {
             .add(request, withCompletionHandler: { error in
                 if let error = error {
                     //handle error
+                    DispatchQueue.main.async {
+                        self.failedAlert(error: error)
+                    }
+                   
                 } else {
-                    //notification set up successfully
+                    DispatchQueue.main.async {
+                    self.successAlert()
                 }
+            }
         })
 
     }
 }
+
+
+
+extension FormViewController {
+    func successAlert() {
+        let alert = UIAlertController(title: "Success", message: "Succesfully created", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+        self.present(alert, animated: true)
+    }
+    
+    func failedAlert(error:Error) {
+        let alert = UIAlertController(title: "Failed", message: "failed to create alert", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+        self.present(alert, animated: true)
+    }
+}
+ 
 
 extension FormViewController {
  
@@ -339,5 +367,8 @@ extension FormViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
     }
+    
+ 
+    
 }
  

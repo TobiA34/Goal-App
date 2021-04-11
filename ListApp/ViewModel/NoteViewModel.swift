@@ -18,6 +18,7 @@ final class NoteViewModel {
         self.context = context
     }
     
+    
     func fetchAllData() -> [Note] {
         // get everything in the entity named Review
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
@@ -35,8 +36,8 @@ final class NoteViewModel {
         // This function checks to see if the item exist in the database
         return getItem(with: item.title ?? "").isEmpty == false
     }
-    
-    
+ 
+ 
     func remove(note:Note) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Note")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
