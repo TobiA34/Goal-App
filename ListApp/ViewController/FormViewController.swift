@@ -14,7 +14,7 @@ class FormViewController: UIViewController {
     let imagePicker = UIImagePickerController()
  
     
-    private var catagorysName = Category.allCases
+    private var categorysName = Category.allCases
     private var selectedCategory: Category?
     var isHidden = false
 
@@ -130,7 +130,7 @@ class FormViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupView()
-        validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
+        validateForm(title: titleTextField, description: descriptionTextView, category: categoryTextField)
         titleTextField.delegate = self
         descriptionTextView.delegate = self
         categoryTextField.resignFirstResponder()
@@ -160,12 +160,12 @@ extension FormViewController {
                 if let error = error {
                     //handle error
                     DispatchQueue.main.async {
-                        self.failedAlert(error: error)
+                        self.failedAlert(title: "Failed", message: "Failed to create goal", buttonTitle: "Ok", error: "\( error.localizedDescription )")
                     }
                    
                 } else {
                     DispatchQueue.main.async {
-                    self.successAlert()
+                        self.successAlert(title: "Success", message: "Successfully created", buttonTitle: "Ok")
                 }
             }
         })
@@ -175,16 +175,16 @@ extension FormViewController {
 
 
 
-extension FormViewController {
-    func successAlert() {
-        let alert = UIAlertController(title: "Success", message: "Succesfully created", preferredStyle: .alert)
+extension UIViewController {
+    func successAlert(title: String, message: String, buttonTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: buttonTitle, style: .default, handler: nil))
 
         self.present(alert, animated: true)
     }
     
-    func failedAlert(error:Error) {
+    func failedAlert(title: String, message: String, buttonTitle: String, error: String?) {
         let alert = UIAlertController(title: "Failed", message: "failed to create alert", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -200,7 +200,7 @@ extension FormViewController {
     @objc func save() {
         
         if isHidden{
-            validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
+            validateForm(title: titleTextField, description: descriptionTextView, category: categoryTextField)
         } else {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
@@ -228,7 +228,7 @@ extension FormViewController {
 extension FormViewController {
     func setupView() {
         view.backgroundColor = UIColor(named: "background")
-        createCatagoryPicker()
+        createCategoryPicker()
         createToolBar()
         
         view.addSubview(card)
@@ -298,12 +298,12 @@ extension FormViewController {
 
 private extension FormViewController {
     
-    private func createCatagoryPicker(){
+    private func createCategoryPicker(){
         
-        let catagoryPicker = UIPickerView()
-        catagoryPicker.delegate = self
+        let categoryPicker = UIPickerView()
+        categoryPicker.delegate = self
         
-        categoryTextField.inputView = catagoryPicker
+        categoryTextField.inputView = categoryPicker
     }
     
     private func createToolBar(){
@@ -323,9 +323,9 @@ private extension FormViewController {
     }
     
     
-    func validateForm(title: UITextField , description: UITextView, catagory: UITextField){
+    func validateForm(title: UITextField , description: UITextView, category: UITextField){
         
-         if title.text!.isEmpty && description.text.isEmpty && catagory.text!.isEmpty {
+         if title.text!.isEmpty && description.text.isEmpty && category.text!.isEmpty {
             navigationItem.rightBarButtonItem?.isEnabled = false
          } else {
 //            saveButton.isHidden = false
@@ -343,32 +343,29 @@ extension FormViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return catagorysName.count
+        return categorysName.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return catagorysName[row].rawValue
+        return categorysName[row].rawValue
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedCategory = catagorysName[row]
+        selectedCategory = categorysName[row]
         categoryTextField.text = selectedCategory?.rawValue
     }
 }
 
 extension FormViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
+        validateForm(title: titleTextField, description: descriptionTextView, category: categoryTextField)
         
     }
 }
 
 extension FormViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
-        validateForm(title: titleTextField, description: descriptionTextView, catagory: categoryTextField)
-    }
-    
- 
-    
+        validateForm(title: titleTextField, description: descriptionTextView, category: categoryTextField)
+        }
 }
- 
+  

@@ -13,7 +13,7 @@ class NotificationManager {
    
     private init() { }
 
-    func getArticle(completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
+    func askFormPermission(completion: @escaping (Result<Bool, Error>) -> ()) {
        UNUserNotificationCenter
            .current()
            .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
