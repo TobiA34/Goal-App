@@ -131,7 +131,7 @@ class FormViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupView()
         validateForm(title: titleTextField, description: descriptionTextView, category: categoryTextField)
-        descriptionTextView.delegate = self
+         descriptionTextView.delegate = self
         categoryTextField.delegate = self
         categoryTextField.resignFirstResponder()
       }
