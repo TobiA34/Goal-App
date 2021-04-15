@@ -13,16 +13,16 @@ class NotificationManager {
    
     private init() { }
 
-    func askFormPermission(completion: @escaping (Result<Bool, Error>) -> ()) {
+    func requestPermission(completion: @escaping (Result<Bool, Error>) -> ()) {
        UNUserNotificationCenter
            .current()
            .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
                 
-            do {
-                completion(.success(true))
-                
-            } catch let error {
-                completion(.failure(error))
+            if error != nil {
+                completion(.success(granted))
+            } else {
+                completion(.failure(error!))
+
             }
            
        }

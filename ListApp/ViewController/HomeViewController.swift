@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
         navigationController?.navigationBar.barTintColor =  Colour.background
          requestPermission()
-    }
+     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -90,7 +90,7 @@ class HomeViewController: UIViewController {
 }
 
 private extension HomeViewController {
-    
+
     func requestPermission() -> Void {
         UNUserNotificationCenter
             .current()

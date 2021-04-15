@@ -160,40 +160,19 @@ extension FormViewController {
                 if let error = error {
                     //handle error
                     DispatchQueue.main.async {
-                        self.failedAlert(title: "Failed", message: "Failed to create goal", buttonTitle: "Ok", error: "\( error.localizedDescription )")
+                        self.show(title: "Failed", message: "\(error.localizedDescription)", buttonTitle: "Ok")
                     }
                    
                 } else {
                     DispatchQueue.main.async {
-                        self.successAlert(title: "Success", message: "Successfully created", buttonTitle: "Ok")
+                        self.show(title: "Success", message: "Successfully created", buttonTitle: "Ok")
                 }
             }
         })
 
     }
 }
-
-
-
-extension UIViewController {
-    func successAlert(title: String, message: String, buttonTitle: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: buttonTitle, style: .default, handler: nil))
-
-        self.present(alert, animated: true)
-    }
-    
-    func failedAlert(title: String, message: String, buttonTitle: String, error: String?) {
-        let alert = UIAlertController(title: "Failed", message: "failed to create alert", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
-        self.present(alert, animated: true)
-    }
-}
  
-
 extension FormViewController {
  
     
