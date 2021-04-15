@@ -131,10 +131,10 @@ class FormViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupView()
         validateForm(title: titleTextField, description: descriptionTextView, category: categoryTextField)
-        titleTextField.delegate = self
         descriptionTextView.delegate = self
+        categoryTextField.delegate = self
         categoryTextField.resignFirstResponder()
-     }
+      }
     
 }
 
@@ -346,5 +346,10 @@ extension FormViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         validateForm(title: titleTextField, description: descriptionTextView, category: categoryTextField)
         }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
+        
+    }
 }
   
