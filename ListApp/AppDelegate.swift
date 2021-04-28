@@ -13,12 +13,14 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let requestIdentifier = "prem"
-
+    let vc = UIViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
-        
+        NotificationManager.shared.requestPermission { success in
+            self.vc.show(title: "\(success)", message: "Successfully asked for permisson", buttonTitle: "OK")
+        }
          return true
     }
 

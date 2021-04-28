@@ -67,8 +67,6 @@ final class NoteViewModel {
  
         fetchRequest.predicate =  NSPredicate(format: "isCompleted == %@", NSNumber(value: true))
         return try! (context.fetch(fetchRequest) as? [Note] ?? [])
-        
-  
     }
     
     /// This will undo the notes
@@ -126,5 +124,6 @@ final class NoteViewModel {
             print("Could not fetch. \(error)")
         }
      }
+
 }
 

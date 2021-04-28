@@ -36,7 +36,7 @@ class CompletedGoalViewController: UIViewController {
     }()
     
     @objc func add(){
-        let formVC = FormViewController()
+        let formVC = FormViewController(sharedDBInstance: DatabaseManager.shared)
         formVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(formVC, animated: true)
     }
@@ -48,18 +48,8 @@ class CompletedGoalViewController: UIViewController {
         setupView()
         
         navigationController?.navigationBar.barTintColor =  Colour.background
-        requestPermission()
-    }
-    
-    func requestPermission() -> Void {
-        UNUserNotificationCenter
-            .current()
-            .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
-                if granted == true && error == nil {
-                    // We have permission!
-                }
-            }
-    }
+     }
+ 
     
     func setupView() {
         view.backgroundColor = UIColor(hex: "#F2F2F2")
@@ -76,7 +66,7 @@ class CompletedGoalViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         noteViewModel.noteList = noteViewModel.getAllCompletedNote()
-        tableview.reloadData()
+         tableview.reloadData()
     }
 }
 

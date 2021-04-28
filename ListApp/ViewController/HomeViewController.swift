@@ -44,7 +44,7 @@ class HomeViewController: UIViewController {
     }()
     
     @objc func add() {
-        let formVC = FormViewController()
+        let formVC = FormViewController(sharedDBInstance: DatabaseManager.shared)
         formVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(formVC, animated: true)
     }
@@ -57,8 +57,7 @@ class HomeViewController: UIViewController {
         setupView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
         navigationController?.navigationBar.barTintColor =  Colour.background
-         requestPermission()
-     }
+      }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -89,20 +88,7 @@ class HomeViewController: UIViewController {
     }
 }
 
-private extension HomeViewController {
-
-    func requestPermission() -> Void {
-        UNUserNotificationCenter
-            .current()
-            .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
-                if granted == true && error == nil {
-                    // We have permission!
-                }
-            }
-    }
-}
-
-
+ 
 private extension HomeViewController {
     private func createToolBar() {
         let toolBar = UIToolbar()

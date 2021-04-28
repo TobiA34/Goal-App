@@ -21,7 +21,8 @@ class NotificationManager {
             if error != nil {
                 completion(.success(granted))
             } else {
-                completion(.failure(error!))
+                guard let error  = error else {return}
+                completion(.failure(error))
 
             }
            
