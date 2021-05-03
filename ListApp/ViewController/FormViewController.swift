@@ -131,12 +131,28 @@ extension FormViewController: FormEndDatePickerTableViewCellDelegate {
 //MARK:- FORM BUTTON DELEGATE
 extension FormViewController: FormButtonTableViewCellDelegate{
     func didTap(id: String) {
-             if let note = formViewModel.newNote {
                 
-                sharedDBInstance.save(note: note)
-                NotificationViewModel.shared.scheduleNotification(note: note)
-                navigationController?.popViewController(animated: true)
-            }
+                if let note = formViewModel.newNote,
+                    formViewModel.isValid {
+                    sharedDBInstance.save(note: note)
+                    NotificationViewModel
+                        .shared
+                        .scheduleNotification(note: note) { [weak self] res in
+                        
+                            guard let self = self else { return }
+                            
+                            switch res {
+                            case .success:
+                                break
+                            case .failure(let error):
+                                self.show(title: "Failed", message: error.localizedDescription, buttonTitle: "OK")
+                            }
+                            
+                    }
+                    navigationController?.popViewController(animated: true)
+                } else {
+                    show(title: "Failed", message: "One of the form is not valid", buttonTitle: "OK")
+                }
     }
 }
 
