@@ -11,10 +11,8 @@ import CoreData
 
 class HomeViewController: UIViewController {
     
-    
     private var noteViewModel: NoteViewModel!
-    var filteredNote = [Note]()
-    
+ 
     var firstLoad = true
     
     init() {
@@ -28,17 +26,17 @@ class HomeViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    let searchBar: UISearchBar = {
+    private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
     
-    let tableview: UITableView = {
+    private let tableview: UITableView = {
         let tableview = UITableView()
         tableview.translatesAutoresizingMaskIntoConstraints = false
         tableview.separatorStyle = .none
-        tableview.backgroundColor =  UIColor(named: "background")
+        tableview.backgroundColor = Colour.background
         tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 44
         tableview.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellID)
@@ -46,7 +44,7 @@ class HomeViewController: UIViewController {
     }()
     
     @objc func add() {
-        let formVC = FormViewController()
+        let formVC = FormViewController(sharedDBInstance: DatabaseManager.shared)
         formVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(formVC, animated: true)
     }
@@ -58,39 +56,21 @@ class HomeViewController: UIViewController {
         searchBar.delegate = self
         setupView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
-        navigationController?.navigationBar.barTintColor =  UIColor(named: "background")
+        navigationController?.navigationBar.barTintColor =  Colour.background
+      }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        noteViewModel.noteList = noteViewModel.getAllUnCompletedNote()
         tableview.reloadData()
-        requestPermission()
     }
+
     
-    func requestPermission() -> Void {
-        UNUserNotificationCenter
-            .current()
-            .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
-                if granted == true && error == nil {
-                    // We have permission!
-                }
-            }
-    }
-    
-    
-    private func createToolBar() {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
-        
-        toolBar.setItems([doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        searchBar.inputAccessoryView = toolBar
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
+
     
     func setupView() {
         createToolBar()
-        view.backgroundColor = UIColor(hexString: "#F2F2F2")
+        view.backgroundColor = Colour.lightGrey
         view.addSubview(tableview)
         view.addSubview(searchBar)
         
@@ -106,7 +86,23 @@ class HomeViewController: UIViewController {
             tableview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+}
+
+ 
+private extension HomeViewController {
+    private func createToolBar() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
+        
+        toolBar.setItems([doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        searchBar.inputAccessoryView = toolBar
+    }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
@@ -115,20 +111,17 @@ extension HomeViewController: UISearchBarDelegate {
             noteViewModel.fetchSearchedData(searchText)
         } else {
             noteViewModel.noteList =  noteViewModel.getAllUnCompletedNote()
-        }
+         }
         tableview.reloadData()
     }
-    
 }
-
-
-
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return noteViewModel.noteList.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -140,7 +133,6 @@ extension HomeViewController: UITableViewDataSource {
         return cell!
     }
     
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let note = noteViewModel.noteList.remove(at: indexPath.row)
@@ -148,19 +140,7 @@ extension HomeViewController: UITableViewDataSource {
             noteViewModel.remove(note: note)
         }
     }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        noteViewModel.noteList = noteViewModel.getAllUnCompletedNote()
-        tableview.reloadData()
-    }
-    
-    
 }
-
-
-
 
 extension HomeViewController: ListTableViewCellDelegate {
     

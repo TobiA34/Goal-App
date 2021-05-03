@@ -8,12 +8,11 @@
 import UIKit
 import CoreData
 
- 
-class CompletedGoalViewController: UIViewController {
 
+class CompletedGoalViewController: UIViewController {
     
     private var noteViewModel: NoteViewModel!
-  
+    
     init(){
         super.init(nibName: nil, bundle: nil)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -25,11 +24,11 @@ class CompletedGoalViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let tableview: UITableView = {
+    private let tableview: UITableView = {
         let tableview = UITableView()
         tableview.translatesAutoresizingMaskIntoConstraints = false
         tableview.separatorStyle = .none
-        tableview.backgroundColor =  UIColor(named: "background")
+        tableview.backgroundColor =  Colour.background
         tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 44
         tableview.register(CompletedNoteTableViewCell.self, forCellReuseIdentifier: CompletedNoteTableViewCell.cellID)
@@ -37,7 +36,7 @@ class CompletedGoalViewController: UIViewController {
     }()
     
     @objc func add(){
-        let formVC = FormViewController()
+        let formVC = FormViewController(sharedDBInstance: DatabaseManager.shared)
         formVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(formVC, animated: true)
     }
@@ -47,24 +46,13 @@ class CompletedGoalViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableview.dataSource = self
         setupView()
-    
-        navigationController?.navigationBar.barTintColor =  UIColor(named: "background")
-         tableview.reloadData()
-        requestPermission()
-    }
-    
-    func requestPermission() -> Void {
-       UNUserNotificationCenter
-           .current()
-           .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
-               if granted == true && error == nil {
-                   // We have permission!
-               }
-       }
-   }
+        
+        navigationController?.navigationBar.barTintColor =  Colour.background
+     }
+ 
     
     func setupView() {
-        view.backgroundColor = UIColor(hexString: "#F2F2F2")
+        view.backgroundColor = UIColor(hex: "#F2F2F2")
         view.addSubview(tableview)
         
         NSLayoutConstraint.activate([
@@ -75,13 +63,11 @@ class CompletedGoalViewController: UIViewController {
         ])
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         noteViewModel.noteList = noteViewModel.getAllCompletedNote()
-        tableview.reloadData()
-     }
-    
+         tableview.reloadData()
+    }
 }
 
 extension CompletedGoalViewController: UITableViewDataSource {
@@ -100,18 +86,17 @@ extension CompletedGoalViewController: UITableViewDataSource {
         return cell!
     }
 }
-    
+
 extension CompletedGoalViewController: CompletedNoteTableViewCellDelegate {
     func undo(completedNote note: Note, at indexPath: IndexPath) {
-            DispatchQueue
-                .main
-                .asyncAfter(deadline: .now() + 0.25) {
-                    self.noteViewModel.undo(false, completedNote: note)
-                     self.tableview.deleteRows(at: [indexPath], with: .automatic)
+        DispatchQueue
+            .main
+            .asyncAfter(deadline: .now() + 0.25) {
+                self.noteViewModel.undo(false, completedNote: note)
+                self.tableview.deleteRows(at: [indexPath], with: .automatic)
             }
-            // Here we want to set the completed flag to true in db
-        }
     }
+}
 
 
 

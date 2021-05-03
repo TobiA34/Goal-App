@@ -7,45 +7,36 @@
 
 import UIKit
 
-protocol ListTableViewCellDelegate: class {
+protocol ListTableViewCellDelegate: AnyObject {
     func didComplete(note: Note, at indexPath: IndexPath)
 }
  
 class ListTableViewCell: UITableViewCell {
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     static let cellID = "ListTableViewCell"
-    private var delegate: ListTableViewCellDelegate?
+    private weak var delegate: ListTableViewCellDelegate?
     private var note: Note?
     private var indexPath: IndexPath?
     
-    let titleLbl: UILabel = {
+   private let titleLbl: UILabel = {
         let titleLbl = UILabel()
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         titleLbl.font = UIFont.boldSystemFont(ofSize: 18.0)
         titleLbl.numberOfLines = 0
-        titleLbl.textColor = UIColor(named: "textColor")
+        titleLbl.textColor = Colour.textColour
         return titleLbl
     }()
     
-    let descriptionLbl: UILabel = {
+    private let descriptionLbl: UILabel = {
         let descriptionLbl = UILabel()
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.font = descriptionLbl.font.withSize(14)
         descriptionLbl.numberOfLines = 0
-        descriptionLbl.textColor = UIColor(named: "textColor")
+        descriptionLbl.textColor = Colour.textColour
         return descriptionLbl
     }()
     
-    let goalImage: UIImageView = {
+    private let goalImage: UIImageView = {
         let goalImage = UIImageView()
         goalImage.translatesAutoresizingMaskIntoConstraints = false
         goalImage.contentMode = .scaleAspectFit
@@ -54,18 +45,18 @@ class ListTableViewCell: UITableViewCell {
     
  
     
-    let doneButton: UIButton = {
+    private var doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.backgroundColor = UIColor(hexString: "#C4C4C4")
+        doneButton.backgroundColor = Colour.grey
         doneButton.layer.cornerRadius = 19
         doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
 
-        doneButton.setImage(UIImage(named: "tick"), for: .normal)
+        doneButton.setImage(Image.tick, for: .normal)
         return doneButton
     }()
     
-    let healthView: UIView = {
+    private let healthView: UIView = {
         let healthView = UIView ()
         healthView.translatesAutoresizingMaskIntoConstraints = false
         healthView.backgroundColor = .lightGray
@@ -74,43 +65,47 @@ class ListTableViewCell: UITableViewCell {
         return healthView
     }()
     
-    let dateView: UIView = {
+    private let dateView: UIView = {
         let dateView = UIView ()
         dateView.translatesAutoresizingMaskIntoConstraints = false
         dateView.backgroundColor = .green
         dateView.layer.cornerRadius = 16
         dateView.clipsToBounds = true
         dateView.backgroundColor = .green
-
         return dateView
     }()
     
-    let dateLbl: UILabel = {
+    private let dateLbl: UILabel = {
         let descriptionLbl = UILabel()
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.font = descriptionLbl.font.withSize(14)
         descriptionLbl.numberOfLines = 0
-        descriptionLbl.textColor = UIColor(named: "textColor")
+        descriptionLbl.textColor = Colour.textColour
         return descriptionLbl
     }()
     
  
-    var healthImgvw: UIImageView = {
+    private var healthImgvw: UIImageView = {
         let healthImgvw = UIImageView()
         healthImgvw.translatesAutoresizingMaskIntoConstraints = false
-        healthImgvw.image = UIImage(named: "tick")
+        healthImgvw.image = Image.tick
         healthImgvw.tintColor = .white
         return healthImgvw
     }()
     
-    let card: UIView = {
+    private let card: UIView = {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         card.layer.cornerRadius = 19
-        card.backgroundColor = UIColor(named: "card")
+        card.backgroundColor = Colour.cardColour
         return card
     }()
     
+    private func setDoneButtonImage(note:Note) {
+        doneButton.setImage(note.isCompleted ?   Image.greenTick :  Image.whiteTick, for: .normal)
+    }
+ 
+  
  
     func configure(note: Note,
                    isTap: Bool,
@@ -119,41 +114,33 @@ class ListTableViewCell: UITableViewCell {
         titleLbl.text = note.title
         descriptionLbl.text = note.desc
 
-        switch note.category {
-        case Category.finance.title:
-            healthImgvw.image = Category.finance.icon
-            healthView.backgroundColor = UIColor(hexString: "#5995ED")
-        case Category.health.title:
-            healthImgvw.image = Category.health.icon
-            healthView.backgroundColor = UIColor(hexString: "#EF476F")
-        case Category.personal.title:
-            healthImgvw.image = Category.personal.icon
-            healthView.backgroundColor = UIColor(hexString: "#F4D35E")
-        case .none:
-            break
-        case .some(_):
-            break
+        if  let rawCategory = note.category,
+            let category = Category(rawValue: rawCategory) {
+            
+            healthImgvw.image = category.icon
+            healthView.backgroundColor = category.colour
         }
+
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/YYYY"
-        if let date = note.endDate{
+        dateFormatter.dateFormat = DateFormat.basic
+        if let date = note.endDate {
             dateLbl.text = dateFormatter.string(from: date)
         }
         self.delegate = delegate
         self.note = note
         self.indexPath = indexPath
-        doneButton.setImage(note.isCompleted ?  #imageLiteral(resourceName: "green-tick") : #imageLiteral(resourceName: "white-tick"), for: .normal)
+        setDoneButtonImage(note: note)
+        setupView()
      }
     
     @objc func done(){
         
         if let selectedNote = note,
            let indexPath = indexPath {
-            doneButton.setImage(selectedNote.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
+            doneButton.setImage(selectedNote.isCompleted ?  Image.whiteTick :  Image.greenTick, for: .normal)
             delegate?.didComplete(note: selectedNote, at: indexPath)
         }
     }
-    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -163,6 +150,7 @@ class ListTableViewCell: UITableViewCell {
         dateLbl.text = nil
         note = nil
         indexPath = nil
+        doneButton.setImage(nil, for: .normal)
     }
 }
 
@@ -227,5 +215,4 @@ private extension ListTableViewCell {
 
         ])
     }
-    
 }

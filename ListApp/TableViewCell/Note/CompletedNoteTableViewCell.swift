@@ -8,62 +8,58 @@
 import UIKit
 
 
-protocol CompletedNoteTableViewCellDelegate: class {
+protocol CompletedNoteTableViewCellDelegate: AnyObject {
     func undo(completedNote: Note, at indexPath: IndexPath)
 }
- 
 
 class CompletedNoteTableViewCell: UITableViewCell {
     
-    
     static let cellID = "CompletedNoteTableViewCell"
-    private var delegate: CompletedNoteTableViewCellDelegate?
+    private weak var delegate: CompletedNoteTableViewCellDelegate?
     private var completedNote: Note?
     private var indexPath: IndexPath?
     
-    let titleLbl: UILabel = {
+    private let titleLbl: UILabel = {
         let titleLbl = UILabel()
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         titleLbl.font = UIFont.boldSystemFont(ofSize: 18.0)
         titleLbl.numberOfLines = 0
-        titleLbl.textColor = UIColor(named: "textColor")
+        titleLbl.textColor = Colour.textColour
         return titleLbl
     }()
     
-    let doneButton: UIButton = {
+    private let doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.backgroundColor = .lightGray
+        doneButton.backgroundColor = Colour.grey
         doneButton.layer.cornerRadius = 19
         
         doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         
-         return doneButton
+        return doneButton
     }()
     
-    let descriptionLbl: UILabel = {
+    private let descriptionLbl: UILabel = {
         let descriptionLbl = UILabel()
         descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
         descriptionLbl.font = descriptionLbl.font.withSize(14)
         descriptionLbl.numberOfLines = 0
-        descriptionLbl.textColor = UIColor(named: "textColor")
+        descriptionLbl.textColor = Colour.textColour
         return descriptionLbl
     }()
     
-    
-    let card: UIView = {
+    private let card: UIView = {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         card.layer.cornerRadius = 19
-        card.backgroundColor = UIColor(named: "card")
+        card.backgroundColor = Colour.cardColour
         return card
     }()
     
-    @objc func undoNote(){
-        
+    @objc func undoNote() {
         if let selectedNote = completedNote,
            let indexPath = indexPath {
-            doneButton.setImage(selectedNote.isCompleted ?  #imageLiteral(resourceName: "white-tick") : #imageLiteral(resourceName: "green-tick"), for: .normal)
+            doneButton.setImage(selectedNote.isCompleted ?  Image.whiteTick : Image.greenTick, for: .normal)
             delegate?.undo(completedNote: selectedNote, at: indexPath)
         }
     }
@@ -76,32 +72,26 @@ class CompletedNoteTableViewCell: UITableViewCell {
         self.indexPath = indexPath
         titleLbl.text = completedNote.title
         descriptionLbl.text = completedNote.desc
-        doneButton.setImage(completedNote.isCompleted ?  #imageLiteral(resourceName: "green-tick") : #imageLiteral(resourceName: "white-tick"), for: .normal)
+        doneButton.setImage(completedNote.isCompleted ?  Image.greenTick :  Image.whiteTick, for: .normal)
         
     }
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLbl.text =  nil
         descriptionLbl.text =  nil
+        doneButton.setImage(nil, for: .normal)
     }
-    
-    
 }
-
-
-
 
 private extension CompletedNoteTableViewCell {
     
     func setupView() {
-        
         contentView.addSubview(card)
         card.addSubview(titleLbl)
         card.addSubview(descriptionLbl)
         card.addSubview(doneButton)
         
         doneButton.addTarget(self, action: #selector(undoNote), for: .touchUpInside)
-
         
         NSLayoutConstraint.activate([
             
@@ -119,16 +109,11 @@ private extension CompletedNoteTableViewCell {
             descriptionLbl.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor),
             descriptionLbl.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -20),
             
-            
             doneButton.topAnchor.constraint(equalTo: card.topAnchor,constant: 40),
             doneButton.leadingAnchor.constraint(equalTo: descriptionLbl.trailingAnchor,constant: 20),
             doneButton.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -20),
             doneButton.heightAnchor.constraint(equalToConstant: 30),
             doneButton.widthAnchor.constraint(equalToConstant: 30),
-            
-            
-            
         ])
     }
-    
 }

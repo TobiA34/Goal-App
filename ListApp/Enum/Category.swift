@@ -10,23 +10,24 @@ import Foundation
 import UIKit
 
  
-enum Category: CaseIterable {
-   case personal
-   case finance
-   case health
+enum Category: String, CaseIterable {
+   case personal = "Personal"
+   case finance = "Finance"
+   case health = "Health"
 }
 
 extension Category {
-   var title: String {
-       switch self {
-       case .personal:
-           return "Personal"
-       case .finance:
-           return "Finance"
-       case .health:
-           return "Health"
-       }
-   }
+
+    var colour: UIColor? {
+        switch self {
+        case .personal:
+           return Colour.yellow
+        case .finance:
+            return Colour.blue
+        case .health:
+            return Colour.pink
+        }
+    }
    
    var icon: UIImage? {
        switch self {
