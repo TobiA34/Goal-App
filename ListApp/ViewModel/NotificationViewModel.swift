@@ -12,15 +12,12 @@ class NotificationViewModel {
     static let shared = NotificationViewModel()
     
     private init() { }
-    
-    let formViewController = FormViewController(sharedDBInstance: DatabaseManager.shared)
-    
-    func scheduleNotification(note: NoteForm) {
+        
+    func scheduleNotification(note: NoteForm, completion: @escaping (Result<Void, Error>) -> Void) {
         
         let yourFireDate = note.endDate
         let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey:
-                                                                    note.title , arguments: nil)
+        content.title = NSString.localizedUserNotificationString(forKey: note.title , arguments: nil)
         content.body = note.description
         
         let dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second], from: yourFireDate)
@@ -30,16 +27,13 @@ class NotificationViewModel {
                                             trigger: trigger)
         UNUserNotificationCenter
             .current()
-            .add(request, withCompletionHandler:{  error in
-                if error != nil {
-                    //handle error
-                    DispatchQueue.main.async {
-                        self.formViewController.show(title: "Failed", message: "\(String(describing: error?.localizedDescription))", buttonTitle: "Ok")
-                    }
+            .add(request, withCompletionHandler: { error in
+                
+                if let error = error {
+                    
+                    completion(.failure(error))
                 } else {
-                    DispatchQueue.main.async {
-                        self.formViewController.show(title: "Success", message: "Successfully created", buttonTitle: "Ok")
-                    }
+                    completion(.success(()))
                 }
             })
     }

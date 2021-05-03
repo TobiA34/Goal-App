@@ -12,6 +12,7 @@ final class NoteViewModel {
     
     var noteList = [Note]()
  
+ 
     private var context: NSManagedObjectContext!
     
     init(context: NSManagedObjectContext) {

@@ -9,7 +9,6 @@ import Foundation
 
 import UIKit
 
- 
 enum Category: String, CaseIterable {
    case personal = "Personal"
    case finance = "Finance"
