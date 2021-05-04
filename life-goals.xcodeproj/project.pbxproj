@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD1E8F2C264177C70036AEFA /* FormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1E8F27264177C60036AEFA /* FormComponent.swift */; };
+		BD1E8F2D264177C70036AEFA /* Colour.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1E8F28264177C60036AEFA /* Colour.swift */; };
+		BD1E8F2E264177C70036AEFA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1E8F29264177C70036AEFA /* Image.swift */; };
+		BD1E8F2F264177C70036AEFA /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1E8F2A264177C70036AEFA /* DateFormat.swift */; };
+		BD1E8F30264177C70036AEFA /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1E8F2B264177C70036AEFA /* LocalNotification.swift */; };
 		BD63E53225FB8D1100FCB17C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E53125FB8D1100FCB17C /* AppDelegate.swift */; };
 		BD63E53425FB8D1100FCB17C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E53325FB8D1100FCB17C /* SceneDelegate.swift */; };
 		BD63E53625FB8D1100FCB17C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E53525FB8D1100FCB17C /* HomeViewController.swift */; };
@@ -23,6 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD1E8F27264177C60036AEFA /* FormComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormComponent.swift; sourceTree = "<group>"; };
+		BD1E8F28264177C60036AEFA /* Colour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colour.swift; sourceTree = "<group>"; };
+		BD1E8F29264177C70036AEFA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		BD1E8F2A264177C70036AEFA /* DateFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
+		BD1E8F2B264177C70036AEFA /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		BD63E52E25FB8D1100FCB17C /* ListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD63E53125FB8D1100FCB17C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD63E53325FB8D1100FCB17C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +133,11 @@
 		BD82533D261778B200F77788 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BD1E8F28264177C60036AEFA /* Colour.swift */,
+				BD1E8F2A264177C70036AEFA /* DateFormat.swift */,
+				BD1E8F27264177C60036AEFA /* FormComponent.swift */,
+				BD1E8F29264177C70036AEFA /* Image.swift */,
+				BD1E8F2B264177C70036AEFA /* LocalNotification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,11 +224,16 @@
 				BDA1D323260B877A0045D383 /* CompletedNoteTableViewCell.swift in Sources */,
 				BD73EED126039484001FECF2 /* Category.swift in Sources */,
 				BD63E53625FB8D1100FCB17C /* HomeViewController.swift in Sources */,
+				BD1E8F30264177C70036AEFA /* LocalNotification.swift in Sources */,
 				BD63E53C25FB8D1100FCB17C /* ListApp.xcdatamodeld in Sources */,
 				BD63E55625FB905E00FCB17C /* FormViewController.swift in Sources */,
+				BD1E8F2D264177C70036AEFA /* Colour.swift in Sources */,
+				BD1E8F2E264177C70036AEFA /* Image.swift in Sources */,
+				BD1E8F2F264177C70036AEFA /* DateFormat.swift in Sources */,
 				BD63E53225FB8D1100FCB17C /* AppDelegate.swift in Sources */,
 				BD63E53425FB8D1100FCB17C /* SceneDelegate.swift in Sources */,
 				BD63E54D25FB8E8D00FCB17C /* ListTableViewCell.swift in Sources */,
+				BD1E8F2C264177C70036AEFA /* FormComponent.swift in Sources */,
 				BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */,
 				BD63E56425FBA84000FCB17C /* Color.swift in Sources */,
 			);

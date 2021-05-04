@@ -8,12 +8,7 @@
 import UIKit
 import CoreData
 import UserNotifications
-
-struct LocalNotification {
-    var id: String
-    var title: String
-    var body: String
-}
+ 
 
 class FormViewController: UIViewController {
     
