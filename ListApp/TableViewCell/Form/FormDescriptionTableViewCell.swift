@@ -41,6 +41,7 @@ class FormDescriptionTableViewCell: UITableViewCell {
         self.descriptionTextView.delegate = self
         self.delegate = delegate
         setUpView(item: item)
+        createToolBar()
     }
 }
 
@@ -97,3 +98,18 @@ extension FormDescriptionTableViewCell: UITextViewDelegate {
         
     }
 
+extension FormDescriptionTableViewCell {
+    private func createToolBar() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
+        
+        toolBar.setItems([doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        descriptionTextView.inputAccessoryView = toolBar
+     }
+    
+    @objc func dismissKeyboard(){
+        contentView.endEditing(true)
+    }
+}

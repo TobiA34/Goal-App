@@ -144,9 +144,12 @@ extension FormViewController: FormButtonTableViewCellDelegate{
 
                             switch res {
                             case .success:
+                                let generator = UINotificationFeedbackGenerator()
+                                generator.notificationOccurred(.success)
                                 break
                             case .failure(let error):
                                 self.show(title: "Failed", message: error.localizedDescription, buttonTitle: "OK")
+                         
                             }
 
                     }

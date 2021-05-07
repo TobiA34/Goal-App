@@ -149,7 +149,10 @@ extension HomeViewController: ListTableViewCellDelegate {
             .main
             .asyncAfter(deadline: .now() + 0.25) {
                 self.noteViewModel.complete(true, note: note)
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.success)
                 self.tableview.deleteRows(at: [indexPath], with: .automatic)
+                
             }
         // Here we want to set the completed flag to true in db
     }

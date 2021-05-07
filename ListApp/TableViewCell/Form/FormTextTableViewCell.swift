@@ -48,6 +48,7 @@ class FormTextTableViewCell: UITableViewCell {
         titleLbl.text = item.title
         titleTextField.placeholder = item.placeholder
         titleTextField.text = item.value as? String
+        createToolBar()
     }
 }
 
@@ -106,3 +107,21 @@ extension FormTextTableViewCell: UITextFieldDelegate {
         return false
     }
 }
+
+extension FormTextTableViewCell {
+        private func createToolBar() {
+            let toolBar = UIToolbar()
+            toolBar.sizeToFit()
+            let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
+            
+            toolBar.setItems([doneButton], animated: false)
+            toolBar.isUserInteractionEnabled = true
+            titleTextField.inputAccessoryView = toolBar
+         }
+        
+        @objc func dismissKeyboard(){
+            contentView.endEditing(true)
+        }
+    }
+
+
