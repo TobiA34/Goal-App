@@ -15,28 +15,28 @@ An app which allows you to set life goals and  it also allows you to complete th
 * Xcode 12.5 
 
  ---
-##### **CoreData**
+#### **CoreData**
  Core data is a framework that allows you to manage model layered objects in an app, and it also lets you persist data as well. I used core data to save the goals, so when a user completes the form then the goal will be saved in core data.
  
  ---
   
-##### **Notifications**
+#### **Notifications**
 Notifications allow you to keep track of what is new on the app. I used notifications to remind a user when their goal needs to be completed.
  
  ---
-##### **MVVM**
+#### **MVVM**
 MVVM is an architecture pattern that allows you to separate the interface of an app, it has the development of the business logic which is the model. In this app, I use MVVM to separate the functions which perform actions in their class. 
  
  ---
-##### **Singletons**
+#### **Singletons**
 Singletons are used to stop instantiating in multiple files. I used the singleton for the database manager so that I don't have to keep creating instances of the class.
  
  ---
-##### **Haptic Feedback**
+#### **Haptic Feedback**
 Haptic feedback is used to stop instantiating in multiple files. I used the singleton for the database manager so that I don't have to keep creating instances of the class.
 
  ---
-##### **Dark Mode**
+#### **Dark Mode**
 Dark mode is used to change the interface of an app to light or dark. I use dark mode in my app when the user selects light or dark in the setting then the UI element will change depending on what theme has been selected.
 
   
