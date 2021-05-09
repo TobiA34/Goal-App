@@ -33,7 +33,7 @@ Singletons are used to stop instantiating in multiple files. I used the singleto
  
  ---
 #### **Haptic Feedback**
-Haptic feedback is used to stop instantiating in multiple files. I used the singleton for the database manager so that I don't have to keep creating instances of the class.
+Haptic feedback is used to send feedback back to the user using vibrations. I have used haptic feedback when a user saves a goal, it will create a  vibration to say they have successfully created a goal.
 
  ---
 #### **Dark Mode**
