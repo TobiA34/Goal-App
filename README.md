@@ -39,7 +39,7 @@ Notifications allow you to keep track of what is new on the app. I used notifica
 MVVM is an architecture pattern that allows you to separate the interface of an app, it has the development of the business logic which is the model. In this app, I use MVVM to separate the functions which perform actions in their class. 
  
  ---
-#### **Singletons**![Uploading FormScreen.png…]()
+#### **Singletons**
 
 Singletons are used to stop instantiating in multiple files. I used the singleton for the database manager so that I don't have to keep creating instances of the class.
  
