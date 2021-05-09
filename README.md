@@ -1,5 +1,7 @@
 # Life Goals 
 
+ ![Icon](https://user-images.githubusercontent.com/36420903/117569420-7bf6a000-b0bd-11eb-8d3a-deb9218f305d.jpeg)
+
 An app which allows you to set life goals and  it also allows you to complete the goals.
 
 ## Table of contents
@@ -13,6 +15,15 @@ An app which allows you to set life goals and  it also allows you to complete th
 # Requirements
 * iOS 14.1+
 * Xcode 12.5 
+
+# ScreenShots
+ ![CompletedGoal](https://user-images.githubusercontent.com/36420903/117569936-e7417180-b0bf-11eb-8c54-2a0589529403.png) ![HomeScreen](https://user-images.githubusercontent.com/36420903/117569946-f1637000-b0bf-11eb-8697-8bf5b01ac289.png) ![FormScreen](https://user-images.githubusercontent.com/36420903/117569941-ed375280-b0bf-11eb-8664-d3d236373b65.png)
+
+
+
+
+
+
 
  ---
 #### **CoreData**
@@ -28,7 +39,8 @@ Notifications allow you to keep track of what is new on the app. I used notifica
 MVVM is an architecture pattern that allows you to separate the interface of an app, it has the development of the business logic which is the model. In this app, I use MVVM to separate the functions which perform actions in their class. 
  
  ---
-#### **Singletons**
+#### **Singletons**![Uploading FormScreen.png…]()
+
 Singletons are used to stop instantiating in multiple files. I used the singleton for the database manager so that I don't have to keep creating instances of the class.
  
  ---
