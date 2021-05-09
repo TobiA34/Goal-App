@@ -11,7 +11,7 @@ import CoreData
 
 class FormViewController: UIViewController {
 
-    private var noteViewModel: NoteViewModel!
+    private var goalViewModel: GoalViewModel!
     private var sharedDBInstance: DatabaseManager!
     let formViewModel = FormViewModel()
     init(sharedDBInstance: DatabaseManager) {
@@ -19,7 +19,7 @@ class FormViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        noteViewModel = NoteViewModel(context: context)
+        goalViewModel = GoalViewModel(context: context)
     }
 
     required init?(coder: NSCoder) {
@@ -133,12 +133,12 @@ extension FormViewController: FormEndDatePickerTableViewCellDelegate {
 extension FormViewController: FormButtonTableViewCellDelegate{
     func didTap(id: String) {
 
-                if let note = formViewModel.newNote,
+                if let goal = formViewModel.newGoal,
                     formViewModel.isValid {
-                    sharedDBInstance.save(note: note)
+                    sharedDBInstance.save(goal: goal)
                     NotificationViewModel
                         .shared
-                        .scheduleNotification(note: note) { [weak self] res in
+                        .scheduleNotification(goal: goal) { [weak self] res in
 
                             guard let self = self else { return }
 

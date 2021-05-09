@@ -13,12 +13,12 @@ class NotificationViewModel {
     
     private init() { }
         
-    func scheduleNotification(note: NoteForm, completion: @escaping (Result<Void, Error>) -> Void) {
+    func scheduleNotification(goal: GoalForm, completion: @escaping (Result<Void, Error>) -> Void) {
         
-        let yourFireDate = note.endDate
+        let yourFireDate = goal.endDate
         let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: note.title , arguments: nil)
-        content.body = note.description
+        content.title = NSString.localizedUserNotificationString(forKey: goal.title , arguments: nil)
+        content.body = goal.description
         
         let dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second], from: yourFireDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)

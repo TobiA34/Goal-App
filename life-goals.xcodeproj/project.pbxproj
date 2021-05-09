@@ -21,12 +21,12 @@
 		BD63E53E25FB8D1100FCB17C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD63E53D25FB8D1100FCB17C /* Assets.xcassets */; };
 		BD63E54125FB8D1100FCB17C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD63E53F25FB8D1100FCB17C /* LaunchScreen.storyboard */; };
 		BD63E54D25FB8E8D00FCB17C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E54C25FB8E8D00FCB17C /* ListTableViewCell.swift */; };
-		BD63E55E25FBA51100FCB17C /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E55D25FBA51100FCB17C /* NoteViewModel.swift */; };
+		BD63E55E25FBA51100FCB17C /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E55D25FBA51100FCB17C /* GoalViewModel.swift */; };
 		BD63E56425FBA84000FCB17C /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */; };
 		BD73EED126039484001FECF2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD73EED026039484001FECF2 /* Category.swift */; };
 		BD9EEF8E262315220010CDBD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9EEF8D262315220010CDBD /* NotificationManager.swift */; };
 		BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */; };
-		BDA1D323260B877A0045D383 /* CompletedNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D322260B877A0045D383 /* CompletedNoteTableViewCell.swift */; };
+		BDA1D323260B877A0045D383 /* CompletedGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */; };
 		BDA2B4172629BCF1008805B2 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA2B4162629BCF1008805B2 /* NotificationViewModel.swift */; };
 		BDA2B41C2629CA8F008805B2 /* FormTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA2B41B2629CA8F008805B2 /* FormTextTableViewCell.swift */; };
 		BDA2B4202629CAB1008805B2 /* FormButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA2B41F2629CAB1008805B2 /* FormButtonTableViewCell.swift */; };
@@ -55,12 +55,12 @@
 		BD63E54025FB8D1100FCB17C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD63E54225FB8D1100FCB17C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD63E54C25FB8E8D00FCB17C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = ListApp/TableViewCell/Note/ListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		BD63E55D25FBA51100FCB17C /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
+		BD63E55D25FBA51100FCB17C /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		BD73EED026039484001FECF2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		BD9EEF8D262315220010CDBD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalViewController.swift; sourceTree = "<group>"; };
-		BDA1D322260B877A0045D383 /* CompletedNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompletedNoteTableViewCell.swift; path = ListApp/TableViewCell/Note/CompletedNoteTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompletedGoalTableViewCell.swift; path = ListApp/TableViewCell/Note/CompletedGoalTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		BDA2B4162629BCF1008805B2 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		BDA2B41B2629CA8F008805B2 /* FormTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextTableViewCell.swift; sourceTree = "<group>"; };
 		BDA2B41F2629CAB1008805B2 /* FormButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonTableViewCell.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 		BD63E56025FBA51600FCB17C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				BD63E55D25FBA51100FCB17C /* NoteViewModel.swift */,
+				BD63E55D25FBA51100FCB17C /* GoalViewModel.swift */,
 				BDA2B4162629BCF1008805B2 /* NotificationViewModel.swift */,
 				BDA2B42B2629CBDA008805B2 /* FormViewModel.swift */,
 			);
@@ -189,7 +189,7 @@
 		BDA2B4192629CA63008805B2 /* Note */ = {
 			isa = PBXGroup;
 			children = (
-				BDA1D322260B877A0045D383 /* CompletedNoteTableViewCell.swift */,
+				BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */,
 				BD63E54C25FB8E8D00FCB17C /* ListTableViewCell.swift */,
 			);
 			path = Note;
@@ -295,9 +295,9 @@
 			files = (
 				BD2E8B9926285D2B00A6E052 /* UIViewController+alert.swift in Sources */,
 				BDA2B4332629CDD0008805B2 /* Protocol.swift in Sources */,
-				BD63E55E25FBA51100FCB17C /* NoteViewModel.swift in Sources */,
+				BD63E55E25FBA51100FCB17C /* GoalViewModel.swift in Sources */,
 				BDA2B4232629CAD4008805B2 /* FormCategoryTableViewCell.swift in Sources */,
-				BDA1D323260B877A0045D383 /* CompletedNoteTableViewCell.swift in Sources */,
+				BDA1D323260B877A0045D383 /* CompletedGoalTableViewCell.swift in Sources */,
 				BD73EED126039484001FECF2 /* Category.swift in Sources */,
 				BDA2B42C2629CBDA008805B2 /* FormViewModel.swift in Sources */,
 				BDA2B4172629BCF1008805B2 /* NotificationViewModel.swift in Sources */,
@@ -467,6 +467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tobi.lifeGoals.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -489,6 +490,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tobi.lifeGoals.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

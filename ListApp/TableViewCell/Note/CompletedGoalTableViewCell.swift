@@ -1,5 +1,5 @@
 //
-//  CompletedNoteTableViewCell.swift
+//  CompletedGoalTableViewCell.swift
 //  ListApp
 //
 //  Created by tobi adegoroye on 24/03/2021.
@@ -8,15 +8,15 @@
 import UIKit
 
 
-protocol CompletedNoteTableViewCellDelegate: AnyObject {
-    func undo(completedNote: Note, at indexPath: IndexPath)
+protocol CompletedGoalTableViewCellDelegate: AnyObject {
+    func undo(completedGoal: Goal, at indexPath: IndexPath)
 }
 
-class CompletedNoteTableViewCell: UITableViewCell {
+class CompletedGoalTableViewCell: UITableViewCell {
     
-    static let cellID = "CompletedNoteTableViewCell"
-    private weak var delegate: CompletedNoteTableViewCellDelegate?
-    private var completedNote: Note?
+    static let cellID = "CompletedGoalTableViewCell"
+    private weak var delegate: CompletedGoalTableViewCellDelegate?
+    private var completedGoal: Goal?
     private var indexPath: IndexPath?
     
     private let titleLbl: UILabel = {
@@ -56,23 +56,23 @@ class CompletedNoteTableViewCell: UITableViewCell {
         return card
     }()
     
-    @objc func undoNote() {
-        if let selectedNote = completedNote,
+    @objc func undoGoal() {
+        if let selectedGoal = completedGoal,
            let indexPath = indexPath {
-            doneButton.setImage(selectedNote.isCompleted ?  Image.whiteTick : Image.greenTick, for: .normal)
-            delegate?.undo(completedNote: selectedNote, at: indexPath)
+            doneButton.setImage(selectedGoal.isCompleted ?  Image.whiteTick : Image.greenTick, for: .normal)
+            delegate?.undo(completedGoal: selectedGoal, at: indexPath)
         }
     }
     
     
-    func configure(completedNote: Note, isTap: Bool, indexPath: IndexPath, delegate: CompletedNoteTableViewCellDelegate?) {
+    func configure(completedGoal: Goal, isTap: Bool, indexPath: IndexPath, delegate: CompletedGoalTableViewCellDelegate?) {
         setupView()
         self.delegate = delegate
-        self.completedNote = completedNote
+        self.completedGoal = completedGoal
         self.indexPath = indexPath
-        titleLbl.text = completedNote.title
-        descriptionLbl.text = completedNote.desc
-        doneButton.setImage(completedNote.isCompleted ?  Image.greenTick :  Image.whiteTick, for: .normal)
+        titleLbl.text = completedGoal.title
+        descriptionLbl.text = completedGoal.desc
+        doneButton.setImage(completedGoal.isCompleted ?  Image.greenTick :  Image.whiteTick, for: .normal)
         
     }
     override func prepareForReuse() {
@@ -83,7 +83,7 @@ class CompletedNoteTableViewCell: UITableViewCell {
     }
 }
 
-private extension CompletedNoteTableViewCell {
+private extension CompletedGoalTableViewCell {
     
     func setupView() {
         contentView.addSubview(card)
@@ -91,7 +91,7 @@ private extension CompletedNoteTableViewCell {
         card.addSubview(descriptionLbl)
         card.addSubview(doneButton)
         
-        doneButton.addTarget(self, action: #selector(undoNote), for: .touchUpInside)
+        doneButton.addTarget(self, action: #selector(undoGoal), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             

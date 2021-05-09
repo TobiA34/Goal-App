@@ -13,7 +13,7 @@ import CoreData
 class DatabaseManager {
     
     
-    private var noteViewModel: NoteViewModel!
+    private var goalViewModel: GoalViewModel!
  
     static let shared = DatabaseManager()
     
@@ -21,19 +21,19 @@ class DatabaseManager {
  
     
  
-    func save(note: NoteForm) {
+    func save(goal: GoalForm) {
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Note", in: context)
+        let entity = NSEntityDescription.entity(forEntityName: "Goal", in: context)
         
 
-        let newNote = Note(entity: entity!, insertInto: context)
-        newNote.title = note.title
-        newNote.desc = note.description
-        newNote.endDate =  note.endDate
-        newNote.category = note.category
+        let newGoal = Goal(entity: entity!, insertInto: context)
+        newGoal.title = goal.title
+        newGoal.desc = goal.description
+        newGoal.endDate =  goal.endDate
+        newGoal.category = goal.category
         do {
             try context.save()
         } catch {

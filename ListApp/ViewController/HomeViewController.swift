@@ -11,7 +11,7 @@ import CoreData
 
 class HomeViewController: UIViewController {
     
-    private var noteViewModel: NoteViewModel!
+    private var goalViewModel: GoalViewModel!
  
     var firstLoad = true
     
@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        noteViewModel = NoteViewModel(context: context)
+        goalViewModel = GoalViewModel(context: context)
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        noteViewModel.noteList = noteViewModel.getAllUnCompletedNote()
+        goalViewModel.goalList = goalViewModel.getAllUnCompletedGoal()
         tableview.reloadData()
     }
 
@@ -108,9 +108,9 @@ private extension HomeViewController {
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-            noteViewModel.fetchSearchedData(searchText)
+            goalViewModel.fetchSearchedData(searchText)
         } else {
-            noteViewModel.noteList =  noteViewModel.getAllUnCompletedNote()
+            goalViewModel.goalList =  goalViewModel.getAllUnCompletedGoal()
          }
         tableview.reloadData()
     }
@@ -119,15 +119,15 @@ extension HomeViewController: UISearchBarDelegate {
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return noteViewModel.noteList.count
+        return goalViewModel.goalList.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let note =  noteViewModel.noteList[indexPath.row]
+        let goal =  goalViewModel.goalList[indexPath.row]
         let cell = tableview.dequeueReusableCell(withIdentifier: ListTableViewCell.cellID,for: indexPath) as? ListTableViewCell
-        cell?.configure(note: note, isTap: noteViewModel.doesExist(item: note), indexPath: indexPath, delegate: self)
+        cell?.configure(goal: goal, isTap: goalViewModel.doesExist(item: goal), indexPath: indexPath, delegate: self)
         cell?.selectionStyle = UITableViewCell.SelectionStyle.none
         cell?.backgroundColor = .clear
         return cell!
@@ -135,20 +135,20 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let note = noteViewModel.noteList.remove(at: indexPath.row)
+            let goal = goalViewModel.goalList.remove(at: indexPath.row)
             tableview.deleteRows(at: [indexPath], with: .automatic)
-            noteViewModel.remove(note: note)
+            goalViewModel.remove(goal: goal)
         }
     }
 }
 
 extension HomeViewController: ListTableViewCellDelegate {
     
-    func didComplete(note: Note, at indexPath: IndexPath) {
+    func didComplete(goal: Goal, at indexPath: IndexPath) {
         DispatchQueue
             .main
             .asyncAfter(deadline: .now() + 0.25) {
-                self.noteViewModel.complete(true, note: note)
+                self.goalViewModel.complete(true, goal: goal)
                 let generator = UINotificationFeedbackGenerator()
                 generator.notificationOccurred(.success)
                 self.tableview.deleteRows(at: [indexPath], with: .automatic)

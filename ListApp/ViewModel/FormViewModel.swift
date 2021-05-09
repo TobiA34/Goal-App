@@ -15,7 +15,7 @@ enum FormContentIDs: String {
     case saveBtn
 }
 
-struct NoteForm {
+struct GoalForm {
       var title: String
       var category: String
       var endDate: Date
@@ -36,14 +36,14 @@ class FormViewModel {
     }
     
  
-    var newNote: NoteForm? {
+    var newGoal: GoalForm? {
         
         guard let title = components.first(where: { $0.id ==  FormContentIDs.title.rawValue })?.value as? String,
               let category = components.first(where: { $0.id ==  FormContentIDs.category.rawValue })?.value as? String,
               let date = components.first(where: { $0.id ==  FormContentIDs.endDate.rawValue })?.value as? Date,
               let description = components.first(where: { $0.id ==  FormContentIDs.description.rawValue })?.value as? String else { return nil }
 
-       return NoteForm(title: title,
+       return GoalForm(title: title,
                  category: category,
                  endDate: date,
                  description: description)

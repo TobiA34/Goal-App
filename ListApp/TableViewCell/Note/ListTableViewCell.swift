@@ -8,14 +8,14 @@
 import UIKit
 
 protocol ListTableViewCellDelegate: AnyObject {
-    func didComplete(note: Note, at indexPath: IndexPath)
+    func didComplete(goal: Goal, at indexPath: IndexPath)
 }
  
 class ListTableViewCell: UITableViewCell {
     
     static let cellID = "ListTableViewCell"
     private weak var delegate: ListTableViewCellDelegate?
-    private var note: Note?
+    private var goal: Goal?
     private var indexPath: IndexPath?
     
    private let titleLbl: UILabel = {
@@ -101,20 +101,20 @@ class ListTableViewCell: UITableViewCell {
         return card
     }()
     
-    private func setDoneButtonImage(note:Note) {
-        doneButton.setImage(note.isCompleted ?   Image.greenTick :  Image.whiteTick, for: .normal)
+    private func setDoneButtonImage(goal:Goal) {
+        doneButton.setImage(goal.isCompleted ?   Image.greenTick :  Image.whiteTick, for: .normal)
     }
  
   
  
-    func configure(note: Note,
+    func configure(goal: Goal,
                    isTap: Bool,
                    indexPath: IndexPath,
                    delegate: ListTableViewCellDelegate?){
-        titleLbl.text = note.title
-        descriptionLbl.text = note.desc
+        titleLbl.text = goal.title
+        descriptionLbl.text = goal.desc
 
-        if  let rawCategory = note.category,
+        if  let rawCategory = goal.category,
             let category = Category(rawValue: rawCategory) {
             
             healthImgvw.image = category.icon
@@ -123,22 +123,22 @@ class ListTableViewCell: UITableViewCell {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormat.basic
-        if let date = note.endDate {
+        if let date = goal.endDate {
             dateLbl.text = dateFormatter.string(from: date)
         }
         self.delegate = delegate
-        self.note = note
+        self.goal = goal
         self.indexPath = indexPath
-        setDoneButtonImage(note: note)
+        setDoneButtonImage(goal: goal)
         setupView()
      }
     
     @objc func done(){
         
-        if let selectedNote = note,
+        if let selectedGoal = goal,
            let indexPath = indexPath {
-            doneButton.setImage(selectedNote.isCompleted ?  Image.whiteTick :  Image.greenTick, for: .normal)
-            delegate?.didComplete(note: selectedNote, at: indexPath)
+            doneButton.setImage(selectedGoal.isCompleted ?  Image.whiteTick :  Image.greenTick, for: .normal)
+            delegate?.didComplete(goal: selectedGoal, at: indexPath)
         }
     }
     
@@ -148,7 +148,7 @@ class ListTableViewCell: UITableViewCell {
         descriptionLbl.text =  nil
         healthImgvw.image = nil
         dateLbl.text = nil
-        note = nil
+        goal = nil
         indexPath = nil
         doneButton.setImage(nil, for: .normal)
     }

@@ -11,13 +11,13 @@ import CoreData
 
 class CompletedGoalViewController: UIViewController {
     
-    private var noteViewModel: NoteViewModel!
+    private var goalViewModel: GoalViewModel!
     
     init(){
         super.init(nibName: nil, bundle: nil)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        noteViewModel = NoteViewModel(context: context)
+        goalViewModel = GoalViewModel(context: context)
     }
     
     required init?(coder: NSCoder) {
@@ -31,7 +31,7 @@ class CompletedGoalViewController: UIViewController {
         tableview.backgroundColor =  Colour.background
         tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 44
-        tableview.register(CompletedNoteTableViewCell.self, forCellReuseIdentifier: CompletedNoteTableViewCell.cellID)
+        tableview.register(CompletedGoalTableViewCell.self, forCellReuseIdentifier: CompletedGoalTableViewCell.cellID)
         return tableview
     }()
     
@@ -64,7 +64,7 @@ class CompletedGoalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        noteViewModel.noteList = noteViewModel.getAllCompletedNote()
+        goalViewModel.goalList = goalViewModel.getAllCompletedGoal()
          tableview.reloadData()
     }
 }
@@ -72,26 +72,26 @@ class CompletedGoalViewController: UIViewController {
 extension CompletedGoalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return   noteViewModel.noteList.count
+        return   goalViewModel.goalList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let completedNote = noteViewModel.noteList[indexPath.row]
-        let cell = tableview.dequeueReusableCell(withIdentifier: CompletedNoteTableViewCell.cellID,for: indexPath) as? CompletedNoteTableViewCell
-        cell?.configure(completedNote: completedNote, isTap: noteViewModel.doesExist(item: completedNote), indexPath: indexPath, delegate: self)
+        let completedGoal = goalViewModel.goalList[indexPath.row]
+        let cell = tableview.dequeueReusableCell(withIdentifier: CompletedGoalTableViewCell.cellID,for: indexPath) as? CompletedGoalTableViewCell
+        cell?.configure(completedGoal: completedGoal, isTap: goalViewModel.doesExist(item: completedGoal), indexPath: indexPath, delegate: self)
         cell?.selectionStyle = UITableViewCell.SelectionStyle.none
         cell?.backgroundColor = .clear
         return cell!
     }
 }
 
-extension CompletedGoalViewController: CompletedNoteTableViewCellDelegate {
-    func undo(completedNote note: Note, at indexPath: IndexPath) {
+extension CompletedGoalViewController: CompletedGoalTableViewCellDelegate {
+    func undo(completedGoal goal: Goal, at indexPath: IndexPath) {
         DispatchQueue
             .main
             .asyncAfter(deadline: .now() + 0.25) {
-                self.noteViewModel.undo(false, completedNote: note)
+                self.goalViewModel.undo(false, completedGoal: goal)
                 self.tableview.deleteRows(at: [indexPath], with: .automatic)
             }
     }
