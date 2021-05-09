@@ -21,7 +21,7 @@ An app which allows you to set life goals and  it also allows you to complete th
  ---
   
 ##### **Notifications**
-Notifications allow you to keep track of what is new on the app. I used notifications to reminder a user when their goal needs to be completed.
+Notifications allow you to keep track of what is new on the app. I used notifications to remind a user when their goal needs to be completed.
  
  ---
 ##### **MVVM**
