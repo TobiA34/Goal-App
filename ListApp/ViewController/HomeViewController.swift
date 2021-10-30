@@ -57,6 +57,7 @@ class HomeViewController: UIViewController {
         setupView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
         navigationController?.navigationBar.barTintColor =  Colour.background
+        navigationItem.title =  getDate()
       }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +67,13 @@ class HomeViewController: UIViewController {
     }
 
     
-
+    func getDate() -> String{
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy"
+        let dateText = dateFormatter.string(from: date)
+        return dateText
+    }
     
     func setupView() {
         createToolBar()
