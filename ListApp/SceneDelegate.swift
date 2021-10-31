@@ -43,6 +43,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.makeKeyAndVisible()
         }
         
+        func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+                   
+            switch shortcutItem.type {
+            case "com.tobi.lifeGoals.add":
+                //Present Form Screen to user.
+            break
+            default:
+                break
+            }
+        }
+        
         func sceneDidEnterBackground(_ scene: UIScene) {
             // Called as the scene transitions from the foreground to the background.
             // Use this method to save data, release shared resources, and store enough scene-specific state information

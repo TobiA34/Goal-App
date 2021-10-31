@@ -40,6 +40,7 @@ class HomeViewController: UIViewController {
         tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 44
         tableview.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellID)
+        tableview.dragInteractionEnabled = true
         return tableview
     }()
     
@@ -49,6 +50,14 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(formVC, animated: true)
     }
     
+    @objc func sort() {
+        if tableview.isEditing {
+            tableview.isEditing = false
+        } else {
+            tableview.isEditing = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -56,6 +65,16 @@ class HomeViewController: UIViewController {
         searchBar.delegate = self
         setupView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
+        
+        self.navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(
+                image: UIImage(systemName: "line.horizontal.3.decrease"),
+                style: .plain,
+                target: self,
+                action: #selector(sort)
+            ),
+        ]
+        
         navigationController?.navigationBar.barTintColor =  Colour.background
         navigationItem.title =  getDate()
       }
@@ -95,7 +114,6 @@ class HomeViewController: UIViewController {
     }
 }
 
- 
 private extension HomeViewController {
     private func createToolBar() {
         let toolBar = UIToolbar()
@@ -122,6 +140,22 @@ extension HomeViewController: UISearchBarDelegate {
         tableview.reloadData()
     }
 }
+
+
+
+extension HomeViewController {
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        goalViewModel.goalList.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+    }
+    
+    
+}
+ 
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
