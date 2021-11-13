@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let requestIdentifier = "prem"
     let vc = UIViewController()
+    var window: UIWindow?
+    var launchedShortcutItem: UIApplicationShortcutItem?
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -21,9 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationManager.shared.requestPermission { success in
             self.vc.show(title: "\(success)", message: "Successfully asked for permisson", buttonTitle: "OK")
         }
+ 
          return true
     }
-
+ 
+   
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

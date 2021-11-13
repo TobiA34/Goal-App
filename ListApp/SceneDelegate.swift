@@ -48,6 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             switch shortcutItem.type {
             case "com.tobi.lifeGoals.add":
                 //Present Form Screen to user.
+                print("yooooooo r")
             break
             default:
                 break
