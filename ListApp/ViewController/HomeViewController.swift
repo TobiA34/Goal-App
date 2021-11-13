@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
         tableview.dataSource = self
         searchBar.delegate = self
         setupView()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
+         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
         
         self.navigationItem.leftBarButtonItems = [
             UIBarButtonItem(

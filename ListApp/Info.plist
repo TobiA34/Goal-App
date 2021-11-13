@@ -2,35 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>UIApplicationShortcutItems</key>
-    <array>
-        <dict>
-            <key>UIApplicationShortcutItemIconType</key>
-            <string>UIApplicationShortcutIconTypeSearch</string>
-            <key>UIApplicationShortcutItemSubtitle</key>
-            <string>by product name</string>
-            <key>UIApplicationShortcutItemTitle</key>
-            <string>Search</string>
-            <key>UIApplicationShortcutItemType</key>
-            <string>QuickAction.Search</string>
-        </dict>
-        <dict>
-            <key>UIApplicationShortcutItemIconFile</key>
-            <string>SavedItems</string>
-            <key>UIApplicationShortcutItemTitle</key>
-            <string>Saved Items</string>
-            <key>UIApplicationShortcutItemType</key>
-            <string>QuickAction.SavedItems</string>
-        </dict>
-        <dict>
-            <key>UIApplicationShortcutItemIconFile</key>
-            <string>cart.png</string>
-            <key>UIApplicationShortcutItemTitle</key>
-            <string>Cart</string>
-            <key>UIApplicationShortcutItemType</key>
-            <string>QuickAction.Cart</string>
-        </dict>
-    </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -76,6 +47,19 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeCompose</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Background color to gray</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Color</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>GoalAction</string>
+		</dict>
+	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

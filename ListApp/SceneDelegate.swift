@@ -10,12 +10,10 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    var vc: UIViewController?
+    var navigation: UINavigationController?
+    
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         if let windowScene = scene as? UIWindowScene {
             
             let window = UIWindow(windowScene: windowScene)
@@ -33,35 +31,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let controllers = [homeVc, completedGoalVc]
             
-            tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
+            tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)
+            }
             
-            vc = tabBarController
-            
-            window.rootViewController = vc
-            
+            window.rootViewController = tabBarController
             self.window = window
             window.makeKeyAndVisible()
-        }
-        
-        func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-                   
-            switch shortcutItem.type {
-            case "com.tobi.lifeGoals.add":
-                //Present Form Screen to user.
-                print("yooooooo r")
-            break
-            default:
-                break
+            self.navigation = tabBarController.viewControllers?.first as? UINavigationController
+            
+            if let shortcutItem = connectionOptions.shortcutItem {
+                // Save it off for later when we become active.
+                if shortcutItem.type == "GoalAction" {
+                    navigation?.pushViewController(FormViewController(sharedDBInstance: DatabaseManager.shared), animated: false)
+                }
             }
         }
-        
-        func sceneDidEnterBackground(_ scene: UIScene) {
-            // Called as the scene transitions from the foreground to the background.
-            // Use this method to save data, release shared resources, and store enough scene-specific state information
-            // to restore the scene back to its current state.
-            
-            // Save changes in the application's managed object context when the application transitions to the background.
-            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+    
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        print(shortcutItem.type)
+        switch shortcutItem.type {
+        case "GoalAction":
+            print("is working")
+            navigation?.pushViewController(FormViewController(sharedDBInstance: DatabaseManager.shared), animated: false)
+            //push from a tab bar controller
+            //do the same thing when an app is killed
+            break
+        default:
+            break
         }
     }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
 }
+
+
