@@ -24,6 +24,7 @@
 		BD63E55E25FBA51100FCB17C /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E55D25FBA51100FCB17C /* GoalViewModel.swift */; };
 		BD63E56425FBA84000FCB17C /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */; };
 		BD73EED126039484001FECF2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD73EED026039484001FECF2 /* Category.swift */; };
+		BD78F72E2740557000D27422 /* QuickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F72D2740557000D27422 /* QuickAction.swift */; };
 		BD9EEF8E262315220010CDBD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9EEF8D262315220010CDBD /* NotificationManager.swift */; };
 		BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */; };
 		BDA1D323260B877A0045D383 /* CompletedGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */; };
@@ -58,6 +59,7 @@
 		BD63E55D25FBA51100FCB17C /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		BD73EED026039484001FECF2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		BD78F72D2740557000D27422 /* QuickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAction.swift; sourceTree = "<group>"; };
 		BD9EEF8D262315220010CDBD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalViewController.swift; sourceTree = "<group>"; };
 		BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompletedGoalTableViewCell.swift; path = ListApp/TableViewCell/Note/CompletedGoalTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				BD73EED026039484001FECF2 /* Category.swift */,
+				BD78F72D2740557000D27422 /* QuickAction.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				BD9EEF8E262315220010CDBD /* NotificationManager.swift in Sources */,
 				BDA2B4202629CAB1008805B2 /* FormButtonTableViewCell.swift in Sources */,
 				BD63E53625FB8D1100FCB17C /* HomeViewController.swift in Sources */,
+				BD78F72E2740557000D27422 /* QuickAction.swift in Sources */,
 				BD1E8F30264177C70036AEFA /* LocalNotification.swift in Sources */,
 				BD63E53C25FB8D1100FCB17C /* ListApp.xcdatamodeld in Sources */,
 				BD26E1E32629F3E70019F02D /* FormViewController.swift in Sources */,

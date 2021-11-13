@@ -11,7 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     var navigation: UINavigationController?
-    
+    let goalAction = Action.GoalAction.rawValue
+
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
@@ -41,25 +42,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             if let shortcutItem = connectionOptions.shortcutItem {
                 // Save it off for later when we become active.
-                if shortcutItem.type == "GoalAction" {
-                    navigation?.pushViewController(FormViewController(sharedDBInstance: DatabaseManager.shared), animated: false)
-                }
+                deepLink(shortcutItem: shortcutItem, actionName: goalAction)
             }
         }
     }
     
-    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        print(shortcutItem.type)
+    func deepLink(shortcutItem: UIApplicationShortcutItem,actionName: String) {
         switch shortcutItem.type {
-        case "GoalAction":
+        case actionName:
             print("is working")
             navigation?.pushViewController(FormViewController(sharedDBInstance: DatabaseManager.shared), animated: false)
-            //push from a tab bar controller
-            //do the same thing when an app is killed
+
             break
         default:
             break
         }
+        
+    }
+    
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        print(shortcutItem.type)
+        deepLink(shortcutItem: shortcutItem, actionName: goalAction)
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
