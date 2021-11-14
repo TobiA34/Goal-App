@@ -53,9 +53,9 @@
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeCompose</string>
 			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>Background color to gray</string>
+			<string>Create a goal</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Color</string>
+			<string>Goal Action</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>GoalAction</string>
 		</dict>

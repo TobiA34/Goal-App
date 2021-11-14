@@ -25,6 +25,12 @@
 		BD63E56425FBA84000FCB17C /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */; };
 		BD73EED126039484001FECF2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD73EED026039484001FECF2 /* Category.swift */; };
 		BD78F72E2740557000D27422 /* QuickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F72D2740557000D27422 /* QuickAction.swift */; };
+		BD78F76C274191A600D27422 /* CreateGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F768274191A600D27422 /* CreateGoalViewController.swift */; };
+		BD78F76D274191A600D27422 /* CompleteGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F769274191A600D27422 /* CompleteGoalViewController.swift */; };
+		BD78F76E274191A600D27422 /* ViewGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F76A274191A600D27422 /* ViewGoalViewController.swift */; };
+		BD78F76F274191A600D27422 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F76B274191A600D27422 /* PageViewController.swift */; };
+		BD78F771274191C600D27422 /* PageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F770274191C600D27422 /* PageEnum.swift */; };
+		BD78F7732741923300D27422 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F7722741923300D27422 /* TabBarViewController.swift */; };
 		BD9EEF8E262315220010CDBD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9EEF8D262315220010CDBD /* NotificationManager.swift */; };
 		BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */; };
 		BDA1D323260B877A0045D383 /* CompletedGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */; };
@@ -60,6 +66,12 @@
 		BD63E56325FBA84000FCB17C /* UIColor+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		BD73EED026039484001FECF2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		BD78F72D2740557000D27422 /* QuickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAction.swift; sourceTree = "<group>"; };
+		BD78F768274191A600D27422 /* CreateGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGoalViewController.swift; sourceTree = "<group>"; };
+		BD78F769274191A600D27422 /* CompleteGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteGoalViewController.swift; sourceTree = "<group>"; };
+		BD78F76A274191A600D27422 /* ViewGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewGoalViewController.swift; sourceTree = "<group>"; };
+		BD78F76B274191A600D27422 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		BD78F770274191C600D27422 /* PageEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageEnum.swift; sourceTree = "<group>"; };
+		BD78F7722741923300D27422 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		BD9EEF8D262315220010CDBD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalViewController.swift; sourceTree = "<group>"; };
 		BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompletedGoalTableViewCell.swift; path = ListApp/TableViewCell/Note/CompletedGoalTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -134,9 +146,11 @@
 		BD63E54A25FB8E6F00FCB17C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				BD78F7662741919900D27422 /* Onboarding */,
 				BD63E53525FB8D1100FCB17C /* HomeViewController.swift */,
 				BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */,
 				BD26E1E22629F3E70019F02D /* FormViewController.swift */,
+				BD78F7722741923300D27422 /* TabBarViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -163,10 +177,22 @@
 		BD73EECF2603947A001FECF2 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				BD78F770274191C600D27422 /* PageEnum.swift */,
 				BD73EED026039484001FECF2 /* Category.swift */,
 				BD78F72D2740557000D27422 /* QuickAction.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		BD78F7662741919900D27422 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				BD78F768274191A600D27422 /* CreateGoalViewController.swift */,
+				BD78F769274191A600D27422 /* CompleteGoalViewController.swift */,
+				BD78F76A274191A600D27422 /* ViewGoalViewController.swift */,
+				BD78F76B274191A600D27422 /* PageViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		BD82533D261778B200F77788 /* Model */ = {
@@ -311,19 +337,25 @@
 				BD78F72E2740557000D27422 /* QuickAction.swift in Sources */,
 				BD1E8F30264177C70036AEFA /* LocalNotification.swift in Sources */,
 				BD63E53C25FB8D1100FCB17C /* ListApp.xcdatamodeld in Sources */,
+				BD78F76F274191A600D27422 /* PageViewController.swift in Sources */,
+				BD78F76C274191A600D27422 /* CreateGoalViewController.swift in Sources */,
 				BD26E1E32629F3E70019F02D /* FormViewController.swift in Sources */,
 				BDA2B4262629CAF0008805B2 /* FormDescriptionTableViewCell.swift in Sources */,
 				BDA2B4292629CB05008805B2 /* FormEndDatePickerTableViewCell.swift in Sources */,
 				BD1E8F3226418A140036AEFA /* DateFormat.swift in Sources */,
+				BD78F76D274191A600D27422 /* CompleteGoalViewController.swift in Sources */,
 				BDA2B41C2629CA8F008805B2 /* FormTextTableViewCell.swift in Sources */,
+				BD78F76E274191A600D27422 /* ViewGoalViewController.swift in Sources */,
 				BD26E1E72629FEBF0019F02D /* DatabaseManager.swift in Sources */,
 				BD1B1995261DC218005E93F5 /* Image.swift in Sources */,
+				BD78F7732741923300D27422 /* TabBarViewController.swift in Sources */,
 				BD1E8F2D264177C70036AEFA /* Colour.swift in Sources */,
 				BD63E53225FB8D1100FCB17C /* AppDelegate.swift in Sources */,
 				BD63E53425FB8D1100FCB17C /* SceneDelegate.swift in Sources */,
 				BD63E54D25FB8E8D00FCB17C /* ListTableViewCell.swift in Sources */,
 				BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */,
 				BD63E56425FBA84000FCB17C /* UIColor+HexString.swift in Sources */,
+				BD78F771274191C600D27422 /* PageEnum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

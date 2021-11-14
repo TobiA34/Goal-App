@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var navigation: UINavigationController?
     let goalAction = Action.GoalAction.rawValue
+    var vc : UIViewController?
 
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -35,7 +36,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)
             }
             
-            window.rootViewController = tabBarController
+            let launchedBefore = UserDefaults.standard.bool(forKey: "hasLaunched")
+            
+           if launchedBefore {
+                vc = tabBarController
+           } else{
+               vc = PageViewController()
+           }
+            UserDefaults.standard.set(true, forKey: "hasLaunched")
+            
+            window.rootViewController = vc
             self.window = window
             window.makeKeyAndVisible()
             self.navigation = tabBarController.viewControllers?.first as? UINavigationController
