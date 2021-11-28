@@ -40,6 +40,7 @@ class FormViewController: UIViewController {
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
+        tableView.layer.cornerRadius = 19
         return tableView
     }()
     
@@ -47,6 +48,8 @@ class FormViewController: UIViewController {
         let formLabel = UILabel()
         formLabel.translatesAutoresizingMaskIntoConstraints = false
         formLabel.text = "New Goal"
+        formLabel.textColor = Colour.textColour
+        formLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         return formLabel
     }()
 
@@ -61,15 +64,15 @@ class FormViewController: UIViewController {
 //MARK:- SETTING UP VIEW
 extension FormViewController {
     func setUpView(){
-        view.backgroundColor = .white
+        view.backgroundColor = Colour.background
         view.addSubview(tableView)
         view.addSubview(formLbl)
 
         NSLayoutConstraint.activate([
             
             formLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            formLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100),
-            formLbl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100),
+            formLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 120),
+            formLbl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -120),
 
             tableView.topAnchor.constraint(equalTo: formLbl.bottomAnchor, constant: 30),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),

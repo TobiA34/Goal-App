@@ -29,9 +29,9 @@ class FormCategoryTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     let categoryTextField: UITextField = {
         let categoryTextField = UITextField()
-        categoryTextField.backgroundColor = Colour.lightGrey
+        categoryTextField.backgroundColor = .systemGray6
         categoryTextField.placeholder = "[pick a category]"
-        categoryTextField.textColor = .black
+        categoryTextField.textColor =  UIColor(named: "cellText")
 
         categoryTextField.font = categoryTextField.font?.withSize(20)
         categoryTextField.translatesAutoresizingMaskIntoConstraints = false

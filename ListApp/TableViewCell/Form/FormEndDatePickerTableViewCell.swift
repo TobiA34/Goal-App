@@ -29,6 +29,8 @@ class FormEndDatePickerTableViewCell: UITableViewCell {
     let endDatePicker: UIDatePicker = {
         let endDatePicker = UIDatePicker()
         endDatePicker.translatesAutoresizingMaskIntoConstraints = false
+        endDatePicker.backgroundColor = .systemGray6
+        endDatePicker.tintColor =  UIColor(named: "cellText")
         return endDatePicker
     }()
     

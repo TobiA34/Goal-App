@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     
     private var goalViewModel: GoalViewModel!
  
+
     var firstLoad = true
     
     init() {
@@ -30,6 +31,12 @@ class HomeViewController: UIViewController {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
+    }()
+    
+    private let emptyview: EmptyScreen = {
+        let emptyview = EmptyScreen()
+        emptyview.translatesAutoresizingMaskIntoConstraints = false
+        return emptyview
     }()
     
     private let tableview: UITableView = {
@@ -64,7 +71,17 @@ class HomeViewController: UIViewController {
         tableview.dataSource = self
         searchBar.delegate = self
         setupView()
-         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
+         let rightBarButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
+        
+        let leftBarButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(sort))
+//        self.navigationItem.rightBarButtonItems = [
+//            UIBarButtonItem(
+//                image: UIImage(systemName: "line.horizontal.3.decrease"),
+//                style: .plain,
+//                target: self,
+//                action: #selector(sort)
+//            ),
+//        ]
         
         self.navigationItem.leftBarButtonItems = [
             UIBarButtonItem(
@@ -76,16 +93,36 @@ class HomeViewController: UIViewController {
         ]
         
         navigationController?.navigationBar.barTintColor =  Colour.background
+        leftBarButton.tintColor = UIColor(named: "image")
+        rightBarButton.tintColor = UIColor(named: "image")
+
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        self.navigationItem.leftBarButtonItem = leftBarButton
+
         navigationItem.title =  getDate()
+
       }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+
         goalViewModel.goalList = goalViewModel.getAllUnCompletedGoal()
         tableview.reloadData()
-    }
+        presentEmptyScreen()
 
+    }
     
+    func presentEmptyScreen() {
+        
+        if  goalViewModel.goalList.isEmpty {
+            emptyview.isHidden = false
+            tableview.isHidden = true
+        } else{
+            emptyview.isHidden = true
+            tableview.isHidden = false
+        }
+    }
+ 
     func getDate() -> String{
         let date = Date()
         let dateFormatter = DateFormatter()
@@ -99,17 +136,25 @@ class HomeViewController: UIViewController {
         view.backgroundColor = Colour.lightGrey
         view.addSubview(tableview)
         view.addSubview(searchBar)
-        
+        view.addSubview(emptyview)
+ 
         NSLayoutConstraint.activate([
             
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             
+            emptyview.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            emptyview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            emptyview.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            emptyview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+ 
+            
             tableview.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             tableview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableview.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+ 
         ])
     }
 }
@@ -179,6 +224,14 @@ extension HomeViewController: UITableViewDataSource {
             let goal = goalViewModel.goalList.remove(at: indexPath.row)
             tableview.deleteRows(at: [indexPath], with: .automatic)
             goalViewModel.remove(goal: goal)
+            if  goalViewModel.goalList.isEmpty {
+                emptyview.isHidden = false
+                tableview.isHidden = true
+            } else{
+                emptyview.isHidden = true
+                tableview.isHidden = false
+            }
+            
         }
     }
 }

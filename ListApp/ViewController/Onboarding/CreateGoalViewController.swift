@@ -15,7 +15,7 @@ class CreateGoalViewController: UIViewController {
         let labelInst = UILabel()
         labelInst.translatesAutoresizingMaskIntoConstraints = false
         labelInst.text = PageEnum.page1.title
-        labelInst.textColor = UIColor(named: "cellText")
+        labelInst.textColor = Colour.textColour
         labelInst.font = UIFont.boldSystemFont(ofSize: 40.0)
         return labelInst
     }()
@@ -24,7 +24,7 @@ class CreateGoalViewController: UIViewController {
         let pageDescription = UILabel()
         pageDescription.translatesAutoresizingMaskIntoConstraints = false
         pageDescription.text = PageEnum.page1.description
-        pageDescription.textColor = UIColor(named: "cellText")
+        pageDescription.textColor = Colour.textColour
         pageDescription.font = UIFont.boldSystemFont(ofSize: 16.0)
         pageDescription.numberOfLines = 0
         return pageDescription
@@ -45,7 +45,7 @@ class CreateGoalViewController: UIViewController {
     }
     
     func setupView() {
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = Colour.background
         view.addSubview(imageView)
         view.addSubview(title1)
         view.addSubview(pageDescription)
@@ -57,6 +57,7 @@ class CreateGoalViewController: UIViewController {
             imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 50),
             
             imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -50),
+            
             
             
             title1.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: 60),

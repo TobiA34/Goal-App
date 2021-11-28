@@ -26,8 +26,8 @@ class FormDescriptionTableViewCell: UITableViewCell {
     
     let descriptionTextView: UITextView = {
         let descriptionTextView = UITextView()
-        descriptionTextView.backgroundColor =  Colour.grey
-        descriptionTextView.textColor = .black
+        descriptionTextView.backgroundColor =  .systemGray6
+        descriptionTextView.textColor = UIColor(named: "cellText")
         descriptionTextView.text = "Enter a description"
 
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false

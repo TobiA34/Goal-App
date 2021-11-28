@@ -26,9 +26,9 @@ class FormTextTableViewCell: UITableViewCell {
     
     let titleTextField: UITextField = {
         let titleTextField = UITextField()
-        titleTextField.textColor = .black
-        titleTextField.attributedPlaceholder = NSAttributedString(string: "[Enter title]", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-        titleTextField.backgroundColor = .lightGray
+        titleTextField.textColor = UIColor(named: "cellText")
+        titleTextField.attributedPlaceholder = NSAttributedString(string: "[Enter title]", attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "cellText")])
+        titleTextField.backgroundColor = .systemGray6
         let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 2.0))
         titleTextField.leftView = leftView
         titleTextField.leftViewMode = .always
