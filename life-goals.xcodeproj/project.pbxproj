@@ -230,8 +230,8 @@
 				BDA2B41B2629CA8F008805B2 /* FormTextTableViewCell.swift */,
 				BDA2B41F2629CAB1008805B2 /* FormButtonTableViewCell.swift */,
 				BDA2B4222629CAD4008805B2 /* FormCategoryTableViewCell.swift */,
-				BDA2B4252629CAF0008805B2 /* FormDescriptionTableViewCell.swift */,
 				BDA2B4282629CB05008805B2 /* FormEndDatePickerTableViewCell.swift */,
+				BDA2B4252629CAF0008805B2 /* FormDescriptionTableViewCell.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";

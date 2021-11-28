@@ -53,13 +53,13 @@ private extension FormEndDatePickerTableViewCell {
         NSLayoutConstraint.activate([
             
             endDateLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            endDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            endDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 200),
+            endDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+            endDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             
             
             endDatePicker.topAnchor.constraint(equalTo: endDateLabel.bottomAnchor, constant: 15),
-            endDatePicker.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-              endDatePicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20),
+            endDatePicker.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+              endDatePicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
             endDatePicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -15),
 
         ])

@@ -28,6 +28,7 @@ class FormDescriptionTableViewCell: UITableViewCell {
         let descriptionTextView = UITextView()
         descriptionTextView.backgroundColor =  Colour.grey
         descriptionTextView.textColor = .black
+        descriptionTextView.text = "Enter a description"
 
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         descriptionTextView.textContainerInset = UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 0)
@@ -53,13 +54,13 @@ private extension FormDescriptionTableViewCell {
 
         NSLayoutConstraint.activate([
             descriptionLbl.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 30),
-            descriptionLbl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 20),
-            descriptionLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -10),
+            descriptionLbl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 30),
+            descriptionLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
             
             
             descriptionTextView.topAnchor.constraint(equalTo: descriptionLbl.bottomAnchor,constant: 20),
-            descriptionTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 20),
-            descriptionTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20),
+            descriptionTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 30),
+            descriptionTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
             descriptionTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
             descriptionTextView.heightAnchor.constraint(equalToConstant: 200)
 

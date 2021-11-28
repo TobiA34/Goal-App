@@ -68,13 +68,13 @@ private extension FormCategoryTableViewCell {
 
         NSLayoutConstraint.activate([
             categoryLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            categoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            categoryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 200),
+            categoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+            categoryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             
             
             categoryTextField.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 15),
-            categoryTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            categoryTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            categoryTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+            categoryTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             categoryTextField.heightAnchor.constraint(equalToConstant: 50),
             
             categoryTextField.widthAnchor.constraint(equalToConstant: 350),

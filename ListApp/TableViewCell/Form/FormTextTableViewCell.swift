@@ -66,12 +66,12 @@ private extension FormTextTableViewCell {
 
         NSLayoutConstraint.activate([
             titleLbl.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20),
-            titleLbl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 10),
-            titleLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -10),
+            titleLbl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 30),
+            titleLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
             
             titleTextField.topAnchor.constraint(equalTo: titleLbl.bottomAnchor,constant: 20),
-            titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 10),
-            titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -10),
+            titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 30),
+            titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -30),
             titleTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
             titleTextField.heightAnchor.constraint(equalToConstant: 45)
         ])

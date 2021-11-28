@@ -42,6 +42,13 @@ class FormViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         return tableView
     }()
+    
+    var formLbl: UILabel = {
+        let formLabel = UILabel()
+        formLabel.translatesAutoresizingMaskIntoConstraints = false
+        formLabel.text = "New Goal"
+        return formLabel
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +63,18 @@ extension FormViewController {
     func setUpView(){
         view.backgroundColor = .white
         view.addSubview(tableView)
+        view.addSubview(formLbl)
 
         NSLayoutConstraint.activate([
+            
+            formLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            formLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100),
+            formLbl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100),
 
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
+            tableView.topAnchor.constraint(equalTo: formLbl.bottomAnchor, constant: 30),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
         ])
     }
 }
