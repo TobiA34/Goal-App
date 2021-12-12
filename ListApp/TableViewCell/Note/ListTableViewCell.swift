@@ -18,87 +18,124 @@ class ListTableViewCell: UITableViewCell {
     private var goal: Goal?
     private var indexPath: IndexPath?
     
-   private let titleLbl: UILabel = {
-        let titleLbl = UILabel()
-        titleLbl.translatesAutoresizingMaskIntoConstraints = false
-        titleLbl.font = UIFont.boldSystemFont(ofSize: 18.0)
-        titleLbl.numberOfLines = 0
-        titleLbl.textColor = Colour.textColour
-        return titleLbl
-    }()
     
-    private let descriptionLbl: UILabel = {
-        let descriptionLbl = UILabel()
-        descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLbl.font = descriptionLbl.font.withSize(14)
-        descriptionLbl.numberOfLines = 0
-        descriptionLbl.textColor = Colour.textColour
-        return descriptionLbl
+    lazy var categoryLbl: UIButton = {
+        let category1 = UIButton()
+        category1.setTitle("category1", for: .normal)
+        category1.setTitleColor(.black, for: .normal)
+        category1.contentEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        category1.backgroundColor = .clear
+        category1.layer.borderWidth = 1
+        category1.layer.cornerRadius = 15
+        category1.translatesAutoresizingMaskIntoConstraints = false
+        category1.layer.borderColor = UIColor.black.cgColor
+        return category1
     }()
-    
-    private let goalImage: UIImageView = {
-        let goalImage = UIImageView()
-        goalImage.translatesAutoresizingMaskIntoConstraints = false
-        goalImage.contentMode = .scaleAspectFit
-        return goalImage
-    }()
-    
  
+    lazy var categoryIcon: UIButton = {
+        let icon = UIButton()
+        icon.setImage(UIImage(systemName: "dollarsign.circle"), for: .normal)
+        icon.backgroundColor = .black
+        icon.tintColor = .white
+        icon.layer.borderWidth = 1
+        icon.layer.cornerRadius = 9
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.layer.borderColor = UIColor.black.cgColor
+        return icon
+    }()
+    
+    lazy var calendarIcon: UIButton = {
+        let icon = UIButton()
+        icon.setImage(UIImage(systemName: "calendar"), for: .normal)
+        icon.backgroundColor = .black
+        icon.tintColor = .white
+        icon.layer.borderWidth = 1
+        icon.layer.cornerRadius = 9
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.layer.borderColor = UIColor.black.cgColor
+        return icon
+    }()
+    
+    lazy var timeIcon: UIButton = {
+        let timeIcon = UIButton()
+        timeIcon.setImage(UIImage(systemName: "clock"), for: .normal)
+        timeIcon.backgroundColor = .black
+        timeIcon.tintColor = .white
+        timeIcon.layer.borderWidth = 1
+        timeIcon.layer.cornerRadius = 9
+        timeIcon.translatesAutoresizingMaskIntoConstraints = false
+        timeIcon.layer.borderColor = UIColor.black.cgColor
+        return timeIcon
+    }()
+    
+    
+    lazy var card: UIView = {
+        let card = UIView()
+        card.translatesAutoresizingMaskIntoConstraints = false
+        card.layer.cornerRadius = 8
+        card.layer.borderWidth = 1
+        card.layer.borderColor = UIColor.black.cgColor
+        card.backgroundColor = .cyan
+        return card
+    }()
+
+    lazy var calendarStackView: UIStackView = {
+        let categoryStackView = UIStackView()
+        categoryStackView.axis = .horizontal
+        categoryStackView.distribution = .equalSpacing
+        categoryStackView.translatesAutoresizingMaskIntoConstraints = false
+        categoryStackView.spacing = 3
+        categoryStackView.alignment = .fill
+         
+        return categoryStackView
+    }()
+    lazy var timeStackView: UIStackView = {
+        let timeStackView = UIStackView()
+        timeStackView.axis = .horizontal
+        timeStackView.distribution = .equalSpacing
+        timeStackView.translatesAutoresizingMaskIntoConstraints = false
+        timeStackView.spacing = 19
+        timeStackView.alignment = .fill
+ 
+        return timeStackView
+    }()
+
+    lazy var titleLbl: UILabel = {
+        let title = UILabel()
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIFont.boldSystemFont(ofSize: 20)
+        title.text = "Buy a ps5 today "
+        return title
+    }()
+    
+    
+    lazy var dateLbl: UILabel = {
+        let title = UILabel()
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIFont.boldSystemFont(ofSize: 14)
+        title.text = "12/05/2021 "
+        return title
+    }()
+
+    lazy var timeLbl: UILabel = {
+        let title = UILabel()
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIFont.boldSystemFont(ofSize: 14)
+        title.text = "07:30 (Remind At 07:35)"
+        return title
+    }()
+    
     
     private var doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.backgroundColor = Colour.grey
-        doneButton.layer.cornerRadius = 19
-        doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-
-        doneButton.setImage(Image.tick, for: .normal)
+        doneButton.backgroundColor = .clear
+        doneButton.layer.cornerRadius = 14.5
+        doneButton.setImage(UIImage(named: "tick"), for: .normal)
+        doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        doneButton.layer.borderWidth = 1
+        doneButton.layer.borderColor = UIColor.black.cgColor
         return doneButton
-    }()
-    
-    private let healthView: UIView = {
-        let healthView = UIView ()
-        healthView.translatesAutoresizingMaskIntoConstraints = false
-        healthView.backgroundColor = .lightGray
-        healthView.layer.cornerRadius = 16
-        healthView.clipsToBounds = true
-        return healthView
-    }()
-    
-    private let dateView: UIView = {
-        let dateView = UIView ()
-        dateView.translatesAutoresizingMaskIntoConstraints = false
-        dateView.backgroundColor = .green
-        dateView.layer.cornerRadius = 16
-        dateView.clipsToBounds = true
-        dateView.backgroundColor = .green
-        return dateView
-    }()
-    
-    private let dateLbl: UILabel = {
-        let descriptionLbl = UILabel()
-        descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLbl.font = descriptionLbl.font.withSize(14)
-        descriptionLbl.numberOfLines = 0
-        descriptionLbl.textColor = Colour.textColour
-        return descriptionLbl
-    }()
-    
- 
-    private var healthImgvw: UIImageView = {
-        let healthImgvw = UIImageView()
-        healthImgvw.translatesAutoresizingMaskIntoConstraints = false
-        healthImgvw.image = Image.tick
-        healthImgvw.tintColor = .white
-        return healthImgvw
-    }()
-    
-    private let card: UIView = {
-        let card = UIView()
-        card.translatesAutoresizingMaskIntoConstraints = false
-        card.layer.cornerRadius = 19
-        card.backgroundColor = Colour.cardColour
-        return card
     }()
     
     private func setDoneButtonImage(goal:Goal) {
@@ -112,20 +149,26 @@ class ListTableViewCell: UITableViewCell {
                    indexPath: IndexPath,
                    delegate: ListTableViewCellDelegate?){
         titleLbl.text = goal.title
-        descriptionLbl.text = goal.desc
-
+ 
         if  let rawCategory = goal.category,
             let category = Category(rawValue: rawCategory) {
-            
-            healthImgvw.image = category.icon
-            healthView.backgroundColor = category.colour
-        }
+            categoryIcon.setImage(category.icon, for: .normal)
+            categoryLbl.setTitle(goal.category, for: .normal)
+         }
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormat.basic
         if let date = goal.endDate {
             dateLbl.text = dateFormatter.string(from: date)
         }
+        
+        let timeDateFormatter = DateFormatter()
+        timeDateFormatter.dateFormat = DateFormat.time
+        if let time = goal.endDate {
+            let timeFormat = timeDateFormatter.string(from: time)
+            timeLbl.text = "\(timeFormat) (Remind at \(timeFormat)"
+        }
+                
         self.delegate = delegate
         self.goal = goal
         self.indexPath = indexPath
@@ -145,9 +188,9 @@ class ListTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLbl.text =  nil
-        descriptionLbl.text =  nil
-        healthImgvw.image = nil
+        categoryLbl.setImage(nil, for: .normal)
         dateLbl.text = nil
+        timeLbl.text = nil
         goal = nil
         indexPath = nil
         doneButton.setImage(nil, for: .normal)
@@ -159,59 +202,73 @@ private extension ListTableViewCell {
     func setupView() {
  
         contentView.addSubview(card)
-        card.addSubview(dateView)
+         card.addSubview(categoryLbl)
+
         card.addSubview(titleLbl)
-        card.addSubview(descriptionLbl)
-        card.addSubview(doneButton)
-        dateView.addSubview(dateLbl)
-        card.addSubview(healthView)
-        card.addSubview(healthImgvw)
         
+        card.addSubview(calendarStackView)
+        calendarStackView.addSubview(calendarIcon)
+        calendarStackView.addSubview(dateLbl)
+        
+        card.addSubview(timeStackView)
+        card.addSubview(doneButton)
+        card.addSubview(categoryIcon)
+
+        calendarStackView.addSubview(timeIcon)
+        calendarStackView.addSubview(timeLbl)
+
         doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            
-            card.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20),
-            card.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 40),
-            card.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -40),
+            card.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 20),
+            card.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 8),
+            card.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,constant: -8),
             card.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
-        
-            healthView.topAnchor.constraint(equalTo: card.topAnchor,constant: 16),
- 
-            healthView.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 16),
-            healthView.trailingAnchor.constraint(equalTo: titleLbl.leadingAnchor,constant: -14),
-            healthView.heightAnchor.constraint(equalToConstant: 30),
-            healthView.widthAnchor.constraint(equalToConstant: 60),
+            
+            categoryLbl.topAnchor.constraint(equalTo: card.safeAreaLayoutGuide.topAnchor,constant: 10),
+            categoryLbl.leadingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.leadingAnchor,constant: 20),
+             categoryLbl.heightAnchor.constraint(equalToConstant: 36),
+            categoryLbl.widthAnchor.constraint(equalToConstant: 100),
 
-            healthImgvw.centerXAnchor.constraint(equalTo: healthView.centerXAnchor),
-            healthImgvw.centerYAnchor.constraint(equalTo: healthView.centerYAnchor),
-            healthImgvw.heightAnchor.constraint(equalToConstant: 18),
-            healthImgvw.widthAnchor.constraint(equalToConstant: 18),
-            
-            titleLbl.topAnchor.constraint(equalTo: card.topAnchor,constant: 20),
-            titleLbl.leadingAnchor.constraint(equalTo: healthImgvw.trailingAnchor,constant: 20),
-            titleLbl.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -20),
-            
-            descriptionLbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor,constant: 10),
-            descriptionLbl.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 60),
-            descriptionLbl.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor,constant: -20),
+            titleLbl.topAnchor.constraint(equalTo: categoryLbl.bottomAnchor,constant: 20),
+            titleLbl.leadingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.leadingAnchor,constant: 20),
+            titleLbl.trailingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.trailingAnchor,constant: -20),
  
-    
-            doneButton.topAnchor.constraint(equalTo: card.topAnchor,constant: 40),
-             doneButton.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -60),
-            doneButton.leadingAnchor.constraint(equalTo: descriptionLbl.trailingAnchor,constant: 60),
+            calendarStackView.topAnchor.constraint(equalTo: titleLbl.bottomAnchor,constant: 20),
+            calendarStackView.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 20),
+            calendarStackView.heightAnchor.constraint(equalToConstant: 20),
+            calendarStackView.widthAnchor.constraint(equalToConstant: 100),
+
             
-            doneButton.heightAnchor.constraint(equalToConstant: 30),
-            doneButton.widthAnchor.constraint(equalToConstant: 30),
-      
-            dateView.topAnchor.constraint(equalTo: descriptionLbl.bottomAnchor,constant: 10),
-            dateView.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 40),
-            dateView.trailingAnchor.constraint(equalTo: card.trailingAnchor,constant: -100),
-            dateView.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -10),
-            dateView.heightAnchor.constraint(equalToConstant: 30),
+            calendarIcon.topAnchor.constraint(equalTo: calendarStackView.topAnchor,constant: 0),
+            calendarIcon.leadingAnchor.constraint(equalTo: calendarStackView.leadingAnchor,constant: 0),
+            dateLbl.topAnchor.constraint(equalTo: calendarStackView.topAnchor,constant: 0),
+            dateLbl.leadingAnchor.constraint(equalTo: calendarIcon.trailingAnchor,constant: 5),
             
-            dateLbl.centerXAnchor.constraint(equalTo: dateView.centerXAnchor),
-            dateLbl.centerYAnchor.constraint(equalTo: dateView.centerYAnchor)
+            
+            timeStackView.topAnchor.constraint(equalTo: calendarStackView.bottomAnchor,constant: 20),
+            timeStackView.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 20),
+            timeStackView.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -20),
+            timeStackView.heightAnchor.constraint(equalToConstant: 20),
+            timeStackView.widthAnchor.constraint(equalToConstant: 100),
+            
+            
+            timeIcon.topAnchor.constraint(equalTo: timeStackView.topAnchor,constant: 0),
+            timeIcon.leadingAnchor.constraint(equalTo: timeStackView.leadingAnchor,constant: 0),
+            timeLbl.topAnchor.constraint(equalTo: timeStackView.topAnchor,constant: 0),
+            timeLbl.leadingAnchor.constraint(equalTo: timeIcon.trailingAnchor,constant: 5),
+
+            
+            doneButton.leadingAnchor.constraint(equalTo: timeStackView.trailingAnchor, constant: 200),
+            doneButton.bottomAnchor.constraint(equalTo: card.bottomAnchor, constant: -30),
+            doneButton.heightAnchor.constraint(equalToConstant: 24),
+            doneButton.widthAnchor.constraint(equalToConstant: 24),
+            
+            categoryIcon.topAnchor.constraint(equalTo: card.safeAreaLayoutGuide.topAnchor,constant: 10),
+            categoryIcon.leadingAnchor.constraint(equalTo: categoryLbl.trailingAnchor,constant: 200),
+            categoryIcon.heightAnchor.constraint(equalToConstant: 26),
+            categoryIcon.widthAnchor.constraint(equalToConstant: 26),
+ 
 
         ])
     }

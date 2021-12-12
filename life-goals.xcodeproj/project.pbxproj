@@ -32,6 +32,7 @@
 		BD78F771274191C600D27422 /* PageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F770274191C600D27422 /* PageEnum.swift */; };
 		BD78F7732741923300D27422 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78F7722741923300D27422 /* TabBarViewController.swift */; };
 		BD9A1A9A2753AF4400736B8A /* EmptyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A1A992753AF4400736B8A /* EmptyScreen.swift */; };
+		BD9A1A9C275A539600736B8A /* EmptyCompleteGoalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A1A9B275A539600736B8A /* EmptyCompleteGoalScreen.swift */; };
 		BD9EEF8E262315220010CDBD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9EEF8D262315220010CDBD /* NotificationManager.swift */; };
 		BDA1D320260B85DE0045D383 /* CompletedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */; };
 		BDA1D323260B877A0045D383 /* CompletedGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */; };
@@ -74,6 +75,7 @@
 		BD78F770274191C600D27422 /* PageEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageEnum.swift; sourceTree = "<group>"; };
 		BD78F7722741923300D27422 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		BD9A1A992753AF4400736B8A /* EmptyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyScreen.swift; sourceTree = "<group>"; };
+		BD9A1A9B275A539600736B8A /* EmptyCompleteGoalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCompleteGoalScreen.swift; sourceTree = "<group>"; };
 		BD9EEF8D262315220010CDBD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		BDA1D31F260B85DE0045D383 /* CompletedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalViewController.swift; sourceTree = "<group>"; };
 		BDA1D322260B877A0045D383 /* CompletedGoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CompletedGoalTableViewCell.swift; path = ListApp/TableViewCell/Note/CompletedGoalTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				BD9A1A992753AF4400736B8A /* EmptyScreen.swift */,
+				BD9A1A9B275A539600736B8A /* EmptyCompleteGoalScreen.swift */,
 			);
 			path = EmptyScreen;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				BD2E8B9926285D2B00A6E052 /* UIViewController+alert.swift in Sources */,
 				BDA2B4332629CDD0008805B2 /* Protocol.swift in Sources */,
 				BD63E55E25FBA51100FCB17C /* GoalViewModel.swift in Sources */,
+				BD9A1A9C275A539600736B8A /* EmptyCompleteGoalScreen.swift in Sources */,
 				BDA2B4232629CAD4008805B2 /* FormCategoryTableViewCell.swift in Sources */,
 				BDA1D323260B877A0045D383 /* CompletedGoalTableViewCell.swift in Sources */,
 				BD73EED126039484001FECF2 /* Category.swift in Sources */,

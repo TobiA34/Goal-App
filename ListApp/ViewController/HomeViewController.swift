@@ -74,14 +74,6 @@ class HomeViewController: UIViewController {
          let rightBarButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
         
         let leftBarButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(sort))
-//        self.navigationItem.rightBarButtonItems = [
-//            UIBarButtonItem(
-//                image: UIImage(systemName: "line.horizontal.3.decrease"),
-//                style: .plain,
-//                target: self,
-//                action: #selector(sort)
-//            ),
-//        ]
         
         self.navigationItem.leftBarButtonItems = [
             UIBarButtonItem(
@@ -198,7 +190,6 @@ extension HomeViewController {
         goalViewModel.goalList.swapAt(sourceIndexPath.row, destinationIndexPath.row)
     }
     
-    
 }
  
 
@@ -238,6 +229,21 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: ListTableViewCellDelegate {
     
+    func displayAlert(){
+        // the alert view
+        let alert = UIAlertController(title: "Goal", message: "life goal has been completed", preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+
+        // change to desired number of seconds (in this case 5 seconds)
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when){
+          // your code with delay
+          alert.dismiss(animated: true, completion: nil)
+        }
+        
+    }
+   
+    
     func didComplete(goal: Goal, at indexPath: IndexPath) {
         DispatchQueue
             .main
@@ -245,6 +251,7 @@ extension HomeViewController: ListTableViewCellDelegate {
                 self.goalViewModel.complete(true, goal: goal)
                 let generator = UINotificationFeedbackGenerator()
                 generator.notificationOccurred(.success)
+                self.displayAlert()
                 self.tableview.deleteRows(at: [indexPath], with: .automatic)
                 
             }
