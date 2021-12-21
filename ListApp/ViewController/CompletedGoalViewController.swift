@@ -51,8 +51,9 @@ class CompletedGoalViewController: UIViewController {
  
     
     func setupView() {
-        view.backgroundColor = UIColor(hex: "#F2F2F2")
-        view.addSubview(tableview)
+        view.backgroundColor = Colour.lightGrey
+
+         view.addSubview(tableview)
         
         NSLayoutConstraint.activate([
             tableview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
