@@ -6,5 +6,4 @@ target 'ListApp' do
   use_frameworks!
 
   # Pods for ListApp
-	pod 'IGColorPicker'
 end

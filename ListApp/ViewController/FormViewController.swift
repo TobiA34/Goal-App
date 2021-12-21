@@ -181,3 +181,10 @@ extension FormViewController: FormCategoryTableViewCellDelegate {
         formViewModel.set(val: category, id: id)
     }
 }
+
+extension FormViewController: FormColourTableViewCellDelegate {
+    func didSelect(_ color: UIColor, with id: String) {
+        formViewModel.set(val: color, id: id)
+    }
+    
+}

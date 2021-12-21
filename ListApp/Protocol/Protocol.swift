@@ -5,7 +5,7 @@
 //  Created by tobi adegoroye on 16/04/2021.
 //
 
-import Foundation
+import UIKit
 
 protocol FormTextTableViewCellDelegate: AnyObject {
     func didInput(_ val: String, with id: String)
@@ -23,4 +23,9 @@ protocol FormCategoryTableViewCellDelegate: AnyObject {
 
 protocol FormButtonTableViewCellDelegate: AnyObject {
     func didTap(id: String)
+}
+
+
+protocol FormColourTableViewCellDelegate: AnyObject {
+    func didSelect(_ color: UIColor, with id: String)
 }

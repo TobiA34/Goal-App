@@ -46,3 +46,9 @@ struct ButtonComponent: FormComponent {
     let title: String
     var value: Any?
 }
+
+ struct ColorComponent: FormComponent {
+    var id: String
+    let title: String
+    var value: Any?
+}

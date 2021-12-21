@@ -12,6 +12,7 @@ enum FormContentIDs: String {
     case category
     case endDate
     case description
+    case colour
     case saveBtn
 }
 
@@ -31,7 +32,7 @@ class FormViewModel {
     }
     
     var isValid: Bool {
-        let form = components.filter({ $0 is TextComponent || $0 is CategoryComponent || $0 is DateComponent || $0 is DescriptionComponent })
+        let form = components.filter({ $0 is TextComponent || $0 is CategoryComponent || $0 is DateComponent || $0 is DescriptionComponent  })
         return form.filter { $0.value == nil || ($0.value as? String)?.isEmpty == true }.isEmpty
     }
     
@@ -41,7 +42,8 @@ class FormViewModel {
         guard let title = components.first(where: { $0.id ==  FormContentIDs.title.rawValue })?.value as? String,
               let category = components.first(where: { $0.id ==  FormContentIDs.category.rawValue })?.value as? String,
               let date = components.first(where: { $0.id ==  FormContentIDs.endDate.rawValue })?.value as? Date,
-              let description = components.first(where: { $0.id ==  FormContentIDs.description.rawValue })?.value as? String else { return nil }
+//              let description = components.first(where: { $0.id ==  FormContentIDs.description.rawValue })?.value as? String else { return nil }
+              let description = components.first(where: { $0.id ==  FormContentIDs.description.rawValue })?.value as? String else {return nil}
 
        return GoalForm(title: title,
                  category: category,
@@ -57,7 +59,8 @@ class FormViewModel {
         DescriptionComponent(id: FormContentIDs.description.rawValue,
                              placeholder: "enter bio", title: "Bio", value: nil),
         ButtonComponent(id: FormContentIDs.description.rawValue,
-                        title: "Description", value: true)
+                        title: "Description", value: true),
+  
     ]
   
 }
