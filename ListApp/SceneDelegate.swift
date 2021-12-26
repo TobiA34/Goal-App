@@ -26,12 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             homeVc.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
             homeVc.title = "Home"
             
-            //Set up CompletedGoalViewController
-            let completedGoalVc = CompletedGoalViewController()
-            completedGoalVc.tabBarItem = UITabBarItem(title: "Completed Goals", image: UIImage(systemName: "target"), tag: 1)
-            completedGoalVc.title = "Completed Goal"
-            
-            let controllers = [homeVc, completedGoalVc]
+//            //Set up CompletedGoalViewController
+//            let completedGoalVc = CompletedGoalViewController()
+//            completedGoalVc.tabBarItem = UITabBarItem(title: "Completed Goals", image: UIImage(systemName: "target"), tag: 1)
+//            completedGoalVc.title = "Completed Goal"
+//            
+            let controllers = [homeVc]
             
             tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)
             }

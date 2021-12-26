@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 
+ 
 
 class HomeViewController: UIViewController {
     
@@ -51,10 +52,36 @@ class HomeViewController: UIViewController {
         return tableview
     }()
     
+    lazy var segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: ["active","completed"])
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.addTarget(self, action: #selector(selectedTab), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
+
+        return segmentedControl
+    }()
+    
+    @objc func selectedTab(_ sender: UISegmentedControl){
+        switch sender.selectedSegmentIndex {
+           case 0 :
+            goalViewModel.goalList = goalViewModel.getAllUnCompletedGoal()
+            presentEmptyScreen()
+            tableview.reloadData()
+
+        case 1:
+            goalViewModel.goalList = goalViewModel.getAllCompletedGoal()
+            tableview.reloadData()
+           default:
+            break
+            }
+        }
+ 
+    
     @objc func add() {
         let formVC = FormViewController(sharedDBInstance: DatabaseManager.shared)
         formVC.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(formVC, animated: true)
+//        navigationController?.pushViewController(formVC, animated: true)
+        present(formVC, animated: true, completion: nil)
     }
     
     @objc func sort() {
@@ -73,36 +100,16 @@ class HomeViewController: UIViewController {
         setupView()
          let rightBarButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(add))
         
-        let leftBarButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(sort))
-        
-        self.navigationItem.leftBarButtonItems = [
-            UIBarButtonItem(
-                image: UIImage(systemName: "line.horizontal.3.decrease"),
-                style: .plain,
-                target: self,
-                action: #selector(sort)
-            ),
-        ]
-        
         navigationController?.navigationBar.barTintColor =  Colour.background
-        leftBarButton.tintColor = UIColor(named: "image")
-        rightBarButton.tintColor = UIColor(named: "image")
+        rightBarButton.tintColor = Colour.primaryColour
 
         self.navigationItem.rightBarButtonItem = rightBarButton
-        self.navigationItem.leftBarButtonItem = leftBarButton
-
-        navigationItem.title =  getDate()
-
-      }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-
-        goalViewModel.goalList = goalViewModel.getAllUnCompletedGoal()
-        tableview.reloadData()
-        presentEmptyScreen()
-
+ 
+        navigationItem.title =  "Goals"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
+//     
+    
     
     func presentEmptyScreen() {
         
@@ -122,12 +129,13 @@ class HomeViewController: UIViewController {
         let dateText = dateFormatter.string(from: date)
         return dateText
     }
-    
+
     func setupView() {
         createToolBar()
         view.backgroundColor = Colour.lightGrey
         view.addSubview(tableview)
         view.addSubview(searchBar)
+        view.addSubview(segmentedControl)
         view.addSubview(emptyview)
  
         NSLayoutConstraint.activate([
@@ -136,13 +144,17 @@ class HomeViewController: UIViewController {
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             
-            emptyview.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            segmentedControl.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+ 
+            emptyview.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
             emptyview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             emptyview.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             emptyview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
  
             
-            tableview.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            tableview.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
             tableview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableview.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -229,6 +241,13 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: ListTableViewCellDelegate {
     
+    func didDelete(goal: Goal, at indexPath: IndexPath) {
+        let goal = goalViewModel.goalList.remove(at: indexPath.row)
+        tableview.deleteRows(at: [indexPath], with: .automatic)
+        goalViewModel.remove(goal: goal)
+    }
+ 
+    
     func displayAlert(){
         // the alert view
         let alert = UIAlertController(title: "Goal", message: "life goal has been completed", preferredStyle: .alert)
@@ -259,3 +278,4 @@ extension HomeViewController: ListTableViewCellDelegate {
     }
 }
 
+ 
