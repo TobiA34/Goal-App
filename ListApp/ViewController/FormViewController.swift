@@ -52,12 +52,26 @@ class FormViewController: UIViewController {
         formLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         return formLabel
     }()
+    
+    var button: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setUpView()
         tableView.dataSource = self
+ 
+       navigationController?.navigationBar.barTintColor =  Colour.background
+ 
+     }
+    
+    @objc func close(){
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -67,8 +81,16 @@ extension FormViewController {
         view.backgroundColor = Colour.background
         view.addSubview(tableView)
         view.addSubview(formLbl)
-
+        view.addSubview(button)
+        
+        button.addTarget(self, action: #selector(close), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
+
+            button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            button.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            button.heightAnchor.constraint(equalToConstant: 20),
+            
             
             formLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             formLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 120),
@@ -164,11 +186,12 @@ extension FormViewController: FormButtonTableViewCellDelegate{
                                 break
                             case .failure(let error):
                                 self.show(title: "Failed", message: error.localizedDescription, buttonTitle: "OK")
-                         
                             }
 
                     }
-                    navigationController?.popViewController(animated: true)
+//                    navigationController?.popViewController(animated: true)
+                    self.dismiss(animated: true, completion: nil)
+         
                 } else {
                     show(title: "Failed", message: "One of the form is not valid", buttonTitle: "OK")
                 }
@@ -181,3 +204,5 @@ extension FormViewController: FormCategoryTableViewCellDelegate {
         formViewModel.set(val: category, id: id)
     }
 }
+
+

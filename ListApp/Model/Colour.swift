@@ -16,5 +16,7 @@ struct Colour {
     static let background = UIColor(named: "background")
     static let cardColour = UIColor(named: "card")
     static let textColour = UIColor(named: "textColour")
+    static let primaryColour = UIColor.hexStringToUIColor(hex: "#3742FA")
+    static let buttonColour = UIColor.hexStringToUIColor(hex: "#FF4757")
 
 }

@@ -9,7 +9,11 @@ import UIKit
 
 protocol ListTableViewCellDelegate: AnyObject {
     func didComplete(goal: Goal, at indexPath: IndexPath)
+    func didDelete(goal: Goal, at indexPath: IndexPath)
+
 }
+
+
  
 class ListTableViewCell: UITableViewCell {
     
@@ -18,131 +22,213 @@ class ListTableViewCell: UITableViewCell {
     private var goal: Goal?
     private var indexPath: IndexPath?
     
-    
-    lazy var categoryLbl: UIButton = {
-        let category1 = UIButton()
-        category1.setTitle("category1", for: .normal)
-        category1.setTitleColor(.black, for: .normal)
-        category1.contentEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        category1.backgroundColor = .clear
-        category1.layer.borderWidth = 1
-        category1.layer.cornerRadius = 15
-        category1.translatesAutoresizingMaskIntoConstraints = false
-        category1.layer.borderColor = UIColor.black.cgColor
-        return category1
-    }()
  
-    lazy var categoryIcon: UIButton = {
-        let icon = UIButton()
-        icon.setImage(UIImage(systemName: "dollarsign.circle"), for: .normal)
-        icon.backgroundColor = .black
-        icon.tintColor = .white
-        icon.layer.borderWidth = 1
-        icon.layer.cornerRadius = 9
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.layer.borderColor = UIColor.black.cgColor
-        return icon
+//
+//    lazy var card: UIView = {
+//        let card = UIView()
+//        card.translatesAutoresizingMaskIntoConstraints = false
+//        card.layer.cornerRadius = 8
+//        card.backgroundColor = .white
+//        return card
+//    }()
+//    lazy var titleLbl: UILabel = {
+//        let title = UILabel()
+//        title.translatesAutoresizingMaskIntoConstraints = false
+//        title.font = UIFont.systemFont(ofSize: 26, weight: .semibold)
+//        title.textColor =  UIColor.hexStringToUIColor(hex: "#2F3542")
+//        return title
+//    }()
+//    lazy var descLbl: UILabel = {
+//        let descLbl = UILabel()
+//        descLbl.translatesAutoresizingMaskIntoConstraints = false
+//        descLbl.font = UIFont.systemFont(ofSize: 15, weight: .light)
+//        descLbl.textColor = UIColor.hexStringToUIColor(hex: "#2F3542")
+//
+//        descLbl.text = "Buy a ps5"
+//        descLbl.lineBreakMode = .byWordWrapping
+//        descLbl.numberOfLines = 0
+//        return descLbl
+//    }()
+//    lazy var dateLbl: UILabel = {
+//        let descLbl = UILabel()
+//        descLbl.translatesAutoresizingMaskIntoConstraints = false
+//        descLbl.font = UIFont.boldSystemFont(ofSize: 15)
+//        descLbl.text = "25/12/2021, 12:00"
+//
+//        return descLbl
+//    }()
+//    lazy var categoryLbl: UILabel = {
+//        let categoryLbl = UILabel()
+//        categoryLbl.translatesAutoresizingMaskIntoConstraints = false
+//        categoryLbl.font = UIFont.boldSystemFont(ofSize: 20)
+//        categoryLbl.text = "Buy a ps5 today "
+//        return categoryLbl
+//    }()
+//    lazy var bellIcon: UIImageView = {
+//        let bellIcon = UIImageView()
+//        bellIcon.translatesAutoresizingMaskIntoConstraints = false
+//        bellIcon.image = UIImage(systemName: "bell.fill")
+//        bellIcon.tintColor = Colour.primaryColour
+//        return bellIcon
+//    }()
+//    lazy var stackVw: UIStackView = {
+//        let stackVw = UIStackView()
+//        stackVw.translatesAutoresizingMaskIntoConstraints = false
+//        stackVw.distribution = .fillEqually
+//        stackVw.axis = .vertical
+//        stackVw.spacing = 10.0
+//        return stackVw
+//    }()
+//    lazy var categoryBtn: UIButton = {
+//        let categoryBtn = UIButton()
+//        categoryBtn.translatesAutoresizingMaskIntoConstraints = false
+//        categoryBtn.backgroundColor = UIColor.hexStringToUIColor(hex: "#FF4757")
+//        categoryBtn.layer.cornerRadius = 18
+//        categoryBtn.setTitleColor(.white, for: .normal)
+//        return categoryBtn
+//    }()
+//    lazy var doneButton: UIButton = {
+//        let doneButton = UIButton()
+//        doneButton.translatesAutoresizingMaskIntoConstraints = false
+//        doneButton.backgroundColor = .clear
+//         return doneButton
+//    }()
+//    let menuBtn: UIButton = {
+//        let menuBtn = UIButton()
+//        menuBtn.translatesAutoresizingMaskIntoConstraints = false
+//        menuBtn.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+//        return menuBtn
+//    }()
+//
+    
+    private lazy var mainStack:UIStackView = {
+        let s = UIStackView()
+        s.axis = .vertical
+        s.distribution = .fillProportionally
+        s.spacing = 8
+        s.alignment = .leading
+        s.translatesAutoresizingMaskIntoConstraints = false
+        return s
+    }()
+
+    private lazy var notificationStack:UIStackView = {
+        let s = UIStackView()
+        s.axis = .horizontal
+        s.distribution = .fillProportionally
+        s.spacing = 8
+        s.translatesAutoresizingMaskIntoConstraints = false
+        return s
     }()
     
-    lazy var calendarIcon: UIButton = {
-        let icon = UIButton()
-        icon.setImage(UIImage(systemName: "calendar"), for: .normal)
-        icon.backgroundColor = .black
-        icon.tintColor = .white
-        icon.layer.borderWidth = 1
-        icon.layer.cornerRadius = 9
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.layer.borderColor = UIColor.black.cgColor
-        return icon
-    }()
-    
-    lazy var timeIcon: UIButton = {
-        let timeIcon = UIButton()
-        timeIcon.setImage(UIImage(systemName: "clock"), for: .normal)
-        timeIcon.backgroundColor = .black
-        timeIcon.tintColor = .white
-        timeIcon.layer.borderWidth = 1
-        timeIcon.layer.cornerRadius = 9
-        timeIcon.translatesAutoresizingMaskIntoConstraints = false
-        timeIcon.layer.borderColor = UIColor.black.cgColor
-        return timeIcon
-    }()
-    
-    
-    lazy var card: UIView = {
+    private lazy var card: UIView = {
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         card.layer.cornerRadius = 8
-        card.layer.borderWidth = 1
-        card.layer.borderColor = UIColor.black.cgColor
-        card.backgroundColor = .cyan
+        card.backgroundColor = .white
         return card
     }()
-
-    lazy var calendarStackView: UIStackView = {
-        let categoryStackView = UIStackView()
-        categoryStackView.axis = .horizontal
-        categoryStackView.distribution = .equalSpacing
-        categoryStackView.translatesAutoresizingMaskIntoConstraints = false
-        categoryStackView.spacing = 3
-        categoryStackView.alignment = .fill
-         
-        return categoryStackView
-    }()
-    lazy var timeStackView: UIStackView = {
-        let timeStackView = UIStackView()
-        timeStackView.axis = .horizontal
-        timeStackView.distribution = .equalSpacing
-        timeStackView.translatesAutoresizingMaskIntoConstraints = false
-        timeStackView.spacing = 19
-        timeStackView.alignment = .fill
- 
-        return timeStackView
-    }()
-
-    lazy var titleLbl: UILabel = {
+    
+    
+    private lazy var titleLbl: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = UIFont.boldSystemFont(ofSize: 20)
-        title.text = "Buy a ps5 today "
+        title.font = UIFont.systemFont(ofSize: 26, weight: .semibold)
+        title.text = "hello"
+        title.textColor = .black
         return title
     }()
     
+    private lazy var descLbl: UILabel = {
+        let descLbl = UILabel()
+        descLbl.translatesAutoresizingMaskIntoConstraints = false
+        descLbl.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        descLbl.numberOfLines = 0
+        descLbl.textColor = .black
+        
+        descLbl.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        descLbl.lineBreakMode = .byWordWrapping
+        descLbl.numberOfLines = 0
+        return descLbl
+    }()
+    
+    
+    lazy var bellIcon: UIImageView = {
+        let bellIcon = UIImageView()
+        bellIcon.translatesAutoresizingMaskIntoConstraints = false
+        bellIcon.image = UIImage(systemName: "bell.fill")
+        bellIcon.tintColor = Colour.primaryColour
+        return bellIcon
+    }()
     
     lazy var dateLbl: UILabel = {
-        let title = UILabel()
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = UIFont.boldSystemFont(ofSize: 14)
-        title.text = "12/05/2021 "
-        return title
+        let descLbl = UILabel()
+        descLbl.translatesAutoresizingMaskIntoConstraints = false
+        descLbl.font = UIFont.boldSystemFont(ofSize: 15)
+        descLbl.text = "25/12/2021, 12:00"
+        
+        return descLbl
     }()
-
-    lazy var timeLbl: UILabel = {
-        let title = UILabel()
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = UIFont.boldSystemFont(ofSize: 14)
-        title.text = "07:30 (Remind At 07:35)"
-        return title
+    
+    lazy var categoryBtn: UIButton = {
+        let categoryBtn = UIButton()
+        categoryBtn.translatesAutoresizingMaskIntoConstraints = false
+        categoryBtn.backgroundColor = Colour.buttonColour
+        categoryBtn.layer.cornerRadius = 18
+        categoryBtn.setTitleColor(.white, for: .normal)
+        categoryBtn.setTitle("category", for: .normal)
+        return categoryBtn
     }()
     
     
-    private var doneButton: UIButton = {
+    lazy var categoryLbl: UILabel = {
+        let categoryLbl = UILabel()
+        categoryLbl.translatesAutoresizingMaskIntoConstraints = false
+        categoryLbl.font = UIFont.boldSystemFont(ofSize: 20)
+        categoryLbl.text = "Buy a ps5 today "
+        return categoryLbl
+    }()
+    
+    lazy var doneButton: UIButton = {
         let doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.backgroundColor = .clear
-        doneButton.layer.cornerRadius = 14.5
-        doneButton.setImage(UIImage(named: "tick"), for: .normal)
-        doneButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        doneButton.layer.borderWidth = 1
-        doneButton.layer.borderColor = UIColor.black.cgColor
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 32, weight: .bold, scale: .large)
+        let largeBoldDoc = UIImage(systemName: "checkmark.circle.fill", withConfiguration: largeConfig)
+        doneButton.setImage(largeBoldDoc, for: .normal)
+        doneButton.tintColor = .blue
         return doneButton
     }()
     
-    private func setDoneButtonImage(goal:Goal) {
-        doneButton.setImage(goal.isCompleted ?   Image.greenTick :  Image.whiteTick, for: .normal)
+    let menuBtn: UIButton = {
+        let menuBtn = UIButton()
+        menuBtn.translatesAutoresizingMaskIntoConstraints = false
+        menuBtn.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        return menuBtn
+    }()
+    
+    
+    func setImage(colour: String){
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold, scale: .large)
+               
+        let largeBoldDoc = UIImage(systemName: "checkmark.circle.fill", withConfiguration: largeConfig)
+
+        doneButton.setImage(largeBoldDoc, for: .normal)
+        doneButton.tintColor = UIColor.hexStringToUIColor(hex: colour)
     }
+    
  
-  
+
+    private func setDoneButtonImage(goal:Goal) {
+        
+        if goal.isCompleted {
+            setImage(colour: "#2ED573")
+        } else {
+            setImage(colour: "#CED6E0")
+
+        }
+     }
+
+
  
     func configure(goal: Goal,
                    isTap: Bool,
@@ -152,8 +238,7 @@ class ListTableViewCell: UITableViewCell {
  
         if  let rawCategory = goal.category,
             let category = Category(rawValue: rawCategory) {
-            categoryIcon.setImage(category.icon, for: .normal)
-            categoryLbl.setTitle(goal.category, for: .normal)
+            categoryBtn.setTitle(category.rawValue, for: .normal)
          }
 
         let dateFormatter = DateFormatter()
@@ -162,12 +247,7 @@ class ListTableViewCell: UITableViewCell {
             dateLbl.text = dateFormatter.string(from: date)
         }
         
-        let timeDateFormatter = DateFormatter()
-        timeDateFormatter.dateFormat = DateFormat.time
-        if let time = goal.endDate {
-            let timeFormat = timeDateFormatter.string(from: time)
-            timeLbl.text = "\(timeFormat) (Remind at \(timeFormat)"
-        }
+        descLbl.text = goal.desc
                 
         self.delegate = delegate
         self.goal = goal
@@ -177,20 +257,42 @@ class ListTableViewCell: UITableViewCell {
      }
     
     @objc func done(){
-        
+
         if let selectedGoal = goal,
            let indexPath = indexPath {
-            doneButton.setImage(selectedGoal.isCompleted ?  Image.whiteTick :  Image.greenTick, for: .normal)
+              
+            setDoneButtonImage(goal: goal!)
+            
             delegate?.didComplete(goal: selectedGoal, at: indexPath)
         }
     }
     
+     func delete() {
+        if let selectedGoal = goal,
+           let indexPath = indexPath {
+            delegate?.didDelete(goal: selectedGoal, at: indexPath)
+        }
+    }
+    
+    @objc func createMenu(){
+        let destruct = UIAction(title: "Destruct", attributes: .destructive) { _ in }
+                
+        let items = UIMenu(title: " ", options: .displayInline, children: [
+            UIAction(title: "Delete", image: UIImage(systemName: "trash"), handler:{ _ in
+                
+                self.delete()
+            }),
+        ])
+                
+        menuBtn.menu = UIMenu(title: "", children: [items, destruct])
+    }
+    
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLbl.text =  nil
-        categoryLbl.setImage(nil, for: .normal)
+        categoryLbl.text = nil
         dateLbl.text = nil
-        timeLbl.text = nil
         goal = nil
         indexPath = nil
         doneButton.setImage(nil, for: .normal)
@@ -200,76 +302,51 @@ class ListTableViewCell: UITableViewCell {
 private extension ListTableViewCell {
     
     func setupView() {
+        
+        menuBtn.addTarget(self, action: #selector(createMenu), for: .touchUpInside)
  
         contentView.addSubview(card)
-         card.addSubview(categoryLbl)
-
-        card.addSubview(titleLbl)
-        
-        card.addSubview(calendarStackView)
-        calendarStackView.addSubview(calendarIcon)
-        calendarStackView.addSubview(dateLbl)
-        
-        card.addSubview(timeStackView)
+        card.addSubview(mainStack)
         card.addSubview(doneButton)
-        card.addSubview(categoryIcon)
+        card.addSubview(menuBtn)
+        mainStack.addArrangedSubview(titleLbl)
+        mainStack.addArrangedSubview(descLbl)
+        mainStack.addArrangedSubview(notificationStack)
+        mainStack.addArrangedSubview(categoryBtn)
+        notificationStack.addArrangedSubview(bellIcon)
+        notificationStack.addArrangedSubview(dateLbl)
 
-        calendarStackView.addSubview(timeIcon)
-        calendarStackView.addSubview(timeLbl)
 
         doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            card.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 20),
+            card.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 16),
             card.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 8),
             card.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,constant: -8),
-            card.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -20),
-            
-            categoryLbl.topAnchor.constraint(equalTo: card.safeAreaLayoutGuide.topAnchor,constant: 10),
-            categoryLbl.leadingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.leadingAnchor,constant: 20),
-             categoryLbl.heightAnchor.constraint(equalToConstant: 36),
-            categoryLbl.widthAnchor.constraint(equalToConstant: 100),
+            card.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,constant: -16),
 
-            titleLbl.topAnchor.constraint(equalTo: categoryLbl.bottomAnchor,constant: 20),
-            titleLbl.leadingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.leadingAnchor,constant: 20),
-            titleLbl.trailingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.trailingAnchor,constant: -20),
+            mainStack.topAnchor.constraint(equalTo: card.safeAreaLayoutGuide.topAnchor,constant: 16),
+            mainStack.leadingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.leadingAnchor,constant: 8),
+            mainStack.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor, constant: -8),
+            mainStack.bottomAnchor.constraint(equalTo: card.safeAreaLayoutGuide.bottomAnchor,constant: -16),
+            
  
-            calendarStackView.topAnchor.constraint(equalTo: titleLbl.bottomAnchor,constant: 20),
-            calendarStackView.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 20),
-            calendarStackView.heightAnchor.constraint(equalToConstant: 20),
-            calendarStackView.widthAnchor.constraint(equalToConstant: 100),
-
+            menuBtn.topAnchor.constraint(equalTo: card.topAnchor,constant: 24),
+            menuBtn.leadingAnchor.constraint(equalTo: mainStack.safeAreaLayoutGuide.trailingAnchor,constant: 16),
+            menuBtn.trailingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.trailingAnchor,constant: -16),
             
-            calendarIcon.topAnchor.constraint(equalTo: calendarStackView.topAnchor,constant: 0),
-            calendarIcon.leadingAnchor.constraint(equalTo: calendarStackView.leadingAnchor,constant: 0),
-            dateLbl.topAnchor.constraint(equalTo: calendarStackView.topAnchor,constant: 0),
-            dateLbl.leadingAnchor.constraint(equalTo: calendarIcon.trailingAnchor,constant: 5),
+            bellIcon.heightAnchor.constraint(equalToConstant: 20),
+            bellIcon.widthAnchor.constraint(equalToConstant: 20),
             
+            doneButton.topAnchor.constraint(equalTo: card.safeAreaLayoutGuide.topAnchor,constant: 72),
+            doneButton.leadingAnchor.constraint(equalTo: mainStack.safeAreaLayoutGuide.trailingAnchor,constant: 10),
+            doneButton.trailingAnchor.constraint(equalTo: card.safeAreaLayoutGuide.trailingAnchor,constant: -16),
             
-            timeStackView.topAnchor.constraint(equalTo: calendarStackView.bottomAnchor,constant: 20),
-            timeStackView.leadingAnchor.constraint(equalTo: card.leadingAnchor,constant: 20),
-            timeStackView.bottomAnchor.constraint(equalTo: card.bottomAnchor,constant: -20),
-            timeStackView.heightAnchor.constraint(equalToConstant: 20),
-            timeStackView.widthAnchor.constraint(equalToConstant: 100),
-            
-            
-            timeIcon.topAnchor.constraint(equalTo: timeStackView.topAnchor,constant: 0),
-            timeIcon.leadingAnchor.constraint(equalTo: timeStackView.leadingAnchor,constant: 0),
-            timeLbl.topAnchor.constraint(equalTo: timeStackView.topAnchor,constant: 0),
-            timeLbl.leadingAnchor.constraint(equalTo: timeIcon.trailingAnchor,constant: 5),
-
-            
-            doneButton.leadingAnchor.constraint(equalTo: timeStackView.trailingAnchor, constant: 200),
-            doneButton.bottomAnchor.constraint(equalTo: card.bottomAnchor, constant: -30),
-            doneButton.heightAnchor.constraint(equalToConstant: 24),
-            doneButton.widthAnchor.constraint(equalToConstant: 24),
-            
-            categoryIcon.topAnchor.constraint(equalTo: card.safeAreaLayoutGuide.topAnchor,constant: 10),
-            categoryIcon.leadingAnchor.constraint(equalTo: categoryLbl.trailingAnchor,constant: 200),
-            categoryIcon.heightAnchor.constraint(equalToConstant: 26),
-            categoryIcon.widthAnchor.constraint(equalToConstant: 26),
  
-
+            doneButton.heightAnchor.constraint(equalToConstant: 40),
+            doneButton.widthAnchor.constraint(equalToConstant: 40),
+            
+             categoryBtn.widthAnchor.constraint(equalToConstant: 96),
         ])
     }
 }

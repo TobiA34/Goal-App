@@ -35,6 +35,32 @@ class CompletedGoalViewController: UIViewController {
         return tableview
     }()
     
+    lazy var segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: ["active","completed"])
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.addTarget(self, action: #selector(selectedTab), for: .valueChanged)
+        return segmentedControl
+    }()
+    
+    
+    @objc func selectedTab(_ sender: UISegmentedControl){
+        switch sender.selectedSegmentIndex {
+           case 0 :
+            let vc = HomeViewController()
+            vc.modalPresentationStyle = .fullScreen
+            vc.navigationItem.hidesBackButton = true
+            navigationController?.pushViewController(vc, animated: true)
+           case 1:
+            let vc = CompletedGoalViewController()
+            vc.modalPresentationStyle = .fullScreen
+            vc.navigationItem.hidesBackButton = true
+            navigationController?.pushViewController(vc, animated: true)
+            default:
+            break
+            }
+        }
+ 
+    
     @objc func add(){
         let formVC = FormViewController(sharedDBInstance: DatabaseManager.shared)
         formVC.modalPresentationStyle = .fullScreen
@@ -51,11 +77,17 @@ class CompletedGoalViewController: UIViewController {
  
     
     func setupView() {
-        view.backgroundColor = UIColor(hex: "#F2F2F2")
+        view.backgroundColor = Colour.lightGrey
         view.addSubview(tableview)
+        view.addSubview(segmentedControl)
         
         NSLayoutConstraint.activate([
-            tableview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            
+            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            
+            tableview.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
             tableview.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableview.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -64,8 +96,8 @@ class CompletedGoalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        goalViewModel.goalList = goalViewModel.getAllCompletedGoal()
-         tableview.reloadData()
+//        goalViewModel.goalList = goalViewModel.getAllCompletedGoal()
+//         tableview.reloadData()
     }
 }
 

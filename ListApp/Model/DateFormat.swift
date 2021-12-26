@@ -8,6 +8,6 @@
 import Foundation
 
 struct DateFormat {
-    static let basic = "dd/MM/YYYY"
+    static let basic = "MM-dd-yyyy, HH:mm"
     static let time = "HH:mm"
 }
